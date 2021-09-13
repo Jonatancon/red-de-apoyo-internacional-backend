@@ -10,21 +10,15 @@ notifications:
       - jhonatanlora2011@gmail.com
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-addons:
-  sonarcloud:
-    organization: "jonatancon1"
-    token:
-      secure: $SONAR # encrypted value of your token
+#addons:
+ # sonarcloud:
+  #  organization: "jonatancon1"
+   # token:
+    #  secure: $SONAR # encrypted value of your token
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=Jonatancon_red-de-apoyo-internacional-backend
-#script:
+  #- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=Jonatancon_red-de-apoyo-internacional-backend
+  - mvn verify sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=jonatancon1 -Dsonar.login=$SONAR_TOKEN
+
+  #script:
  #- mvn verify sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=Jonatan-Stiven-Restrepo-Lora -Dsonar.login=$SONAR_TOKEN
-
-  #travis encrypt ad3aaae4720c0003d2393f138dd3870a8c7db412
-
-
-
-
-
-#token: 2a01f207675437604dd8fe7823c797642d2ade97
