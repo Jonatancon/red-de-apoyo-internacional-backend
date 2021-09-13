@@ -11,4 +11,10 @@ notifications:
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
-  - mvn verify sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=Jonatan-Stiven-Restrepo-Lora -Dsonar.login=$SONAR
+ - mvn verify sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=Jonatan-Stiven-Restrepo-Lora -Dsonar.login=$SONAR_TOKEN
+
+
+
+
+
+token: 2a01f207675437604dd8fe7823c797642d2ade97
