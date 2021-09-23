@@ -1,6 +1,5 @@
 package com.pragma.reddeapoyointernacionalbackend.domain.services;
 
-import com.pragma.reddeapoyointernacionalbackend.domain.model.Usuario;
 import com.pragma.reddeapoyointernacionalbackend.domain.persistence.UsuarioPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
