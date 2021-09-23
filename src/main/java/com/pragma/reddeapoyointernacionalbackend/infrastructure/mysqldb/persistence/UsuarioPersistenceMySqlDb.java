@@ -3,6 +3,8 @@ package com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.persist
 import com.pragma.reddeapoyointernacionalbackend.domain.persistence.UsuarioPersistence;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public class UsuarioPersistenceMySqlDb implements UsuarioPersistence {
+
 }

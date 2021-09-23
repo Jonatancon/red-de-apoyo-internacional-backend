@@ -16,7 +16,7 @@ public class UsuarioDto {
 
     @NotBlank
     @NotNull
-    private String NombreUsuario;
+    private String nombreUsuario;
     @NotBlank
     @NotNull
     private String password;

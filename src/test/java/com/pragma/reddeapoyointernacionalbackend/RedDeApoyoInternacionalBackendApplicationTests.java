@@ -8,6 +8,7 @@ class RedDeApoyoInternacionalBackendApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// for spring
 	}
 
 }

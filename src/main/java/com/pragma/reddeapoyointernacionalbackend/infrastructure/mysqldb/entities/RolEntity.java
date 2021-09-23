@@ -1,25 +1,37 @@
 package com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.entities;
 
+import com.pragma.reddeapoyointernacionalbackend.domain.model.enums.NombreRol;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("rol")
+@Entity
 public class RolEntity {
 
     @Id
-    @Column("id_rol")
+    @Column(name = "id_rol")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idRol;
-    @Column("nombre_rol")
-    private String nombreRol;
+
+    @Column(name = "nombre_rol")
+    private NombreRol nombreRol;
+
+    public Integer getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(Integer idRol) {
+        this.idRol = idRol;
+    }
+
+    public NombreRol getNombreRol() {
+        return nombreRol;
+    }
+
+    public void setNombreRol(NombreRol nombreRol) {
+        this.nombreRol = nombreRol;
+    }
 }

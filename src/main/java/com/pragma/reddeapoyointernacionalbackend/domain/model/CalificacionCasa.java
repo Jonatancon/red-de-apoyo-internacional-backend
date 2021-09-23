@@ -5,9 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 @Data
 @NoArgsConstructor
 @Builder
@@ -15,13 +12,7 @@ import javax.validation.constraints.NotNull;
 public class CalificacionCasa {
 
     private Casa casa;
-    @NotBlank
-    @NotNull
     private String comentario;
-    @NotBlank
-    @NotNull
-    private Integer calificacionCasa;
-    @NotBlank
-    @NotNull
+    private Integer calificacionHospedaje;
     private Integer calificacionAnfitrion;
 }

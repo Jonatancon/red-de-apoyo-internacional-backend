@@ -1,31 +1,69 @@
 package com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import javax.persistence.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("calificacion_casa")
+@Entity
 public class CalificacionCasaEntity {
 
     @Id
-    @Column("id_calificacion_casa")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_calificacion_casa")
     private Integer idCalificacionCasa;
-    @Column("fk_casa_afiliada")
-    private CasaEntity casa;
-    @Column("comentario")
+
+    @Column(length = 500)
     private String comentario;
-    @Column("calificacion")
+
+    @Column(name = "calificacion_casa")
     private Integer calificacionCasa;
-    @Column("calificacion_anfitrion")
+
+    @Column(name = "calificacion_anfitrion")
     private Integer calificacionAnfitrion;
+
+    @JoinColumn(name = "fk_casa_afiliada")
+    @ManyToOne
+    private CasaEntity casa;
+
+    public Integer getIdCalificacionCasa() {
+        return idCalificacionCasa;
+    }
+
+    public void setIdCalificacionCasa(Integer idCalificacionCasa) {
+        this.idCalificacionCasa = idCalificacionCasa;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public Integer getCalificacionCasa() {
+        return calificacionCasa;
+    }
+
+    public void setCalificacionCasa(Integer calificacionCasa) {
+        this.calificacionCasa = calificacionCasa;
+    }
+
+    public Integer getCalificacionAnfitrion() {
+        return calificacionAnfitrion;
+    }
+
+    public void setCalificacionAnfitrion(Integer calificacionAnfitrion) {
+        this.calificacionAnfitrion = calificacionAnfitrion;
+    }
+
+    public CasaEntity getCasa() {
+        return casa;
+    }
+
+    public void setCasa(CasaEntity casa) {
+        this.casa = casa;
+    }
 }
