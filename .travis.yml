@@ -10,6 +10,13 @@ notifications:
       - jhonatanlora2011@gmail.com
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+      - mysql-client
 #addons:
  # sonarcloud:
   #  organization: "jonatancon1"
