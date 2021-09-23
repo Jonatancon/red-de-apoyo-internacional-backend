@@ -1,29 +1,58 @@
 package com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("calificacion_usuario")
+@Entity
 public class CalificacionUsuarioEntity {
 
     @Id
-    @Column("id_calificacion_usuario")
+    @Column(name = "id_calificacion_usuario")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCalificacionUsuario;
-    @Column("fk_usuario")
-    private UsuarioEntity usuarioEntity;
-    @Column("comentario")
+
+    @Column(length = 500)
     private String comentario;
-    @Column("calificacion")
+
     private Integer calificacion;
+
+    @JoinColumn(name = "fk_usuario")
+    @ManyToOne
+    private UsuarioEntity usuarioEntity;
+
+    public Integer getIdCalificacionUsuario() {
+        return idCalificacionUsuario;
+    }
+
+    public void setIdCalificacionUsuario(Integer idCalificacionUsuario) {
+        this.idCalificacionUsuario = idCalificacionUsuario;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public Integer getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(Integer calificacion) {
+        this.calificacion = calificacion;
+    }
+
+    public UsuarioEntity getUsuarioEntity() {
+        return usuarioEntity;
+    }
+
+    public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
+        this.usuarioEntity = usuarioEntity;
+    }
 }

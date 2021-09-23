@@ -1,36 +1,92 @@
 package com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
-import org.springframework.stereotype.Indexed;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("usuario")
+@Entity
 public class UsuarioEntity {
 
     @Id
-    @Column("id_usuario")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     private Integer idUsuario;
-    @Column("nombre_usuario")
-    private String NombreUsuario;
-    @Column("password")
+
+    @Column(name = "nombre_usuario", unique = true)
+    private String nombreUsuario;
+
     private String password;
-    @Column("nombre_completo")
+
+    @Column(name = "nombre_completo")
     private String nombreCompleto;
-    @Column("ciudad")
+
     private String ciudad;
-    @Column("pais")
+
     private String pais;
-    @Column("fk_rol")
-    private RolEntity rolEntity;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"),
+    inverseJoinColumns = @JoinColumn(name = "rol_id"))
+    private Set<RolEntity> rolEntity = new HashSet<>();
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public Set<RolEntity> getRolEntity() {
+        return rolEntity;
+    }
+
+    public void setRolEntity(Set<RolEntity> rolEntity) {
+        this.rolEntity = rolEntity;
+    }
 }

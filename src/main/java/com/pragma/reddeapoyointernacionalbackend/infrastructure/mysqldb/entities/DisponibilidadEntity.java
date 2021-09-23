@@ -1,29 +1,29 @@
 package com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("disponibilidad")
+@Entity
 public class DisponibilidadEntity {
 
     @Id
-    @Column("id_disponibilidad")
+    @Column(name = "id_disponibilidad")
     private Integer idDisponibilidad;
-    @Column("fecha_llegada")
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "fecha_llegada")
     private String fechaLlegada;
-    @Column("fecha_salida")
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "fecha_salida")
     private String fechaSalida;
-    @Column("fk_casa")
+
+    @JoinColumn(name = "fk_casa")
+    @ManyToOne
     private CasaEntity casaEntity;
 }

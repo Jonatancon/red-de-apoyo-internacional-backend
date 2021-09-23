@@ -1,31 +1,87 @@
 package com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
-@Data
+import javax.persistence.*;
+
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("casa")
+@Entity
 public class CasaEntity {
 
     @Id
-    @Column("id_casa")
+    @Column(name = "id_casa")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCasa;
-    @Column("direccion")
+
     private String direccion;
-    @Column("ciudad")
+
     private String ciudad;
-    @Column("pais")
+
     private String pais;
-    @Column("telefono")
+
     private String telefono;
-    @Column("foto")
+
     private byte[] foto;
-    @Column("fk_propietario")
+
+    @JoinColumn(name = "fk_propietario")
+    @ManyToOne
     private UsuarioEntity usuarioEntity;
+
+    public Integer getIdCasa() {
+        return idCasa;
+    }
+
+    public void setIdCasa(Integer idCasa) {
+        this.idCasa = idCasa;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    public UsuarioEntity getUsuarioEntity() {
+        return usuarioEntity;
+    }
+
+    public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
+        this.usuarioEntity = usuarioEntity;
+    }
 }

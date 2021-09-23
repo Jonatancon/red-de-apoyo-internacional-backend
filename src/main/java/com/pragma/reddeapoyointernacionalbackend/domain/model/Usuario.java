@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -14,20 +14,10 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class Usuario {
 
-    @NotBlank
-    @NotNull
-    private String NombreUsuario;
-    @NotBlank
-    @NotNull
+    private String nombreUsuario;
     private String password;
-    @NotBlank
-    @NotNull
     private String nombreCompleto;
-    @NotBlank
-    @NotNull
     private String ciudad;
-    @NotBlank
-    @NotNull
     private String pais;
-    private Rol rol;
+    private Set<Rol> rol = new HashSet<>();
 }

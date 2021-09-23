@@ -5,9 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 @Data
 @NoArgsConstructor
 @Builder
@@ -15,10 +12,6 @@ import javax.validation.constraints.NotNull;
 public class CalificacionUsuario {
 
     private Usuario usuario;
-    @NotBlank
-    @NotNull
     private String comentario;
-    @NotBlank
-    @NotNull
     private Integer calificacion;
 }
