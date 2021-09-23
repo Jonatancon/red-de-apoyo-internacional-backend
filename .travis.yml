@@ -22,6 +22,8 @@ before_script:
   - sudo systemctl restart mysql
   - sudo mysql_upgrade
   - mysql --version
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS red_de_apoyo;'
+
     #addons:
  # sonarcloud:
   #  organization: "jonatancon1"
