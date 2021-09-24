@@ -16,7 +16,7 @@ import java.util.Set;
 @Repository
 public class UsuarioPersistenceMySqlDb implements UsuarioPersistence {
 
-    public UsuarioDao usuarioDao;
+    private UsuarioDao usuarioDao;
 
     @Autowired
     public UsuarioPersistenceMySqlDb(UsuarioDao usuarioDao) {
@@ -25,15 +25,18 @@ public class UsuarioPersistenceMySqlDb implements UsuarioPersistence {
 
     @Override
     public Optional<Usuario> obtenerNombreUsuario(String nombreUsuario) {
-        UsuarioEntity usuarioEntity = usuarioDao.findByNombreUsuario(nombreUsuario).get();
 
-        return Optional.of(Usuario.builder().nombreUsuario(usuarioEntity.getNombreUsuario())
-                .nombreCompleto(usuarioEntity.getNombreCompleto())
-                .password(usuarioEntity.getPassword())
-                .ciudad(usuarioEntity.getCiudad())
-                .pais(usuarioEntity.getPais())
-                .rol(obtenerRoles(usuarioEntity))
-                .build());
+        if (usuarioDao.findByNombreUsuario(nombreUsuario).isPresent()) {
+            UsuarioEntity usuarioEntity = usuarioDao.findByNombreUsuario(nombreUsuario).get();
+            return Optional.of(Usuario.builder().nombreUsuario(usuarioEntity.getNombreUsuario())
+                    .nombreCompleto(usuarioEntity.getNombreCompleto())
+                    .password(usuarioEntity.getPassword())
+                    .ciudad(usuarioEntity.getCiudad())
+                    .pais(usuarioEntity.getPais())
+                    .rol(obtenerRoles(usuarioEntity))
+                    .build());
+        }
+        return Optional.empty();
     }
 
     @Override
