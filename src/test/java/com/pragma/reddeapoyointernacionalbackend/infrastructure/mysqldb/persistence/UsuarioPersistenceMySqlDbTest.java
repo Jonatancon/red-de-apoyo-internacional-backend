@@ -21,7 +21,6 @@ class UsuarioPersistenceMySqlDbTest {
     private final UsuarioDao usuarioDao = Mockito.mock(UsuarioDao.class);
 
     RolEntity rols;
-    RolEntity rols1;
     Set<RolEntity> rol = new HashSet<>();
     UsuarioEntity usuarioEntity = new UsuarioEntity();
 
@@ -42,7 +41,7 @@ class UsuarioPersistenceMySqlDbTest {
         Assertions.assertEquals("1234", result.get().getPassword());
         Assertions.assertEquals("colombia", result.get().getPais());
         Assertions.assertEquals("medellin", result.get().getCiudad());
-        Assertions.assertEquals("[Rol(nombreRol=USUARIO), Rol(nombreRol=USUARIO)]",
+        Assertions.assertEquals("[Rol(nombreRol=ANFITRION)]",
                 new ArrayList<>(result.get().getRol()).toString());
     }
 
@@ -59,10 +58,8 @@ class UsuarioPersistenceMySqlDbTest {
     }
 
     Set<RolEntity> crearRoles() {
-        rols = new RolEntity(1, NombreRol.USUARIO);
+        rols = new RolEntity(1, NombreRol.ANFITRION);
         rol.add(rols);
-        rols1 = new RolEntity(2, NombreRol.ANFITRION);
-        rol.add(rols1);
 
         return rol;
     }
