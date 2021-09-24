@@ -1,4 +1,7 @@
 package com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.daos;
 
-public interface CalificacionUsuarioDao {
+import com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.entities.CalificacionUsuarioEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CalificacionUsuarioDao extends JpaRepository<CalificacionUsuarioEntity, Integer> {
 }
