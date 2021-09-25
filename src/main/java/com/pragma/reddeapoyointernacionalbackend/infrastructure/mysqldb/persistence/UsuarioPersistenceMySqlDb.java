@@ -16,7 +16,7 @@ import java.util.Set;
 @Repository
 public class UsuarioPersistenceMySqlDb implements UsuarioPersistence {
 
-    private UsuarioDao usuarioDao;
+    private final UsuarioDao usuarioDao;
 
     @Autowired
     public UsuarioPersistenceMySqlDb(UsuarioDao usuarioDao) {
@@ -25,28 +25,29 @@ public class UsuarioPersistenceMySqlDb implements UsuarioPersistence {
 
     @Override
     public Optional<Usuario> obtenerNombreUsuario(String nombreUsuario) {
-
-        if (usuarioDao.findByNombreUsuario(nombreUsuario).isPresent()) {
-            UsuarioEntity usuarioEntity = usuarioDao.findByNombreUsuario(nombreUsuario).get();
-            return Optional.of(Usuario.builder().nombreUsuario(usuarioEntity.getNombreUsuario())
-                    .nombreCompleto(usuarioEntity.getNombreCompleto())
-                    .password(usuarioEntity.getPassword())
-                    .ciudad(usuarioEntity.getCiudad())
-                    .pais(usuarioEntity.getPais())
-                    .rol(obtenerRoles(usuarioEntity))
-                    .build());
+        if (usuarioDao.findByNombreUsuario(nombreUsuario).isEmpty()) {
+            return Optional.empty();
         }
-        return Optional.empty();
+
+        UsuarioEntity usuarioEntity = usuarioDao.findByNombreUsuario(nombreUsuario).get();
+
+        return Optional.of(Usuario.builder().nombreUsuario(usuarioEntity.getNombreUsuario())
+                .nombreCompleto(usuarioEntity.getNombreCompleto())
+                .password(usuarioEntity.getPassword())
+                .ciudad(usuarioEntity.getCiudad())
+                .pais(usuarioEntity.getPais())
+                .rol(obtenerRoles(usuarioEntity))
+                .build());
     }
 
     @Override
     public void crearUsuario(Usuario usuario) {
-
+        usuarioDao.save(crearUsuarioEntity(usuario));
     }
 
     @Override
     public Boolean existeNombreUsuario(String nombreUsuario) {
-        return null;
+        return usuarioDao.existsByNombreUsuario(nombreUsuario);
     }
 
     private Set<Rol> obtenerRoles(UsuarioEntity usuarioEntity) {
@@ -59,5 +60,13 @@ public class UsuarioPersistenceMySqlDb implements UsuarioPersistence {
         });
 
         return roles;
+    }
+
+    private UsuarioEntity crearUsuarioEntity (Usuario usuario) {
+
+        return UsuarioEntity.builder().idUsuario(null)
+                .nombreUsuario(usuario.getNombreUsuario()).nombreCompleto(usuario.getNombreCompleto())
+                .password(usuario.getPassword()).pais(usuario.getPais()).ciudad(usuario.getCiudad())
+                .rolEntity(null).build();
     }
 }

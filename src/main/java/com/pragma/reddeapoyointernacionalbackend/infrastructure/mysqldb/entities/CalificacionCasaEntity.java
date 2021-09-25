@@ -1,12 +1,14 @@
 package com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class CalificacionCasaEntity {
 
     @Id

@@ -2,6 +2,7 @@ package com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.entitie
 
 import com.pragma.reddeapoyointernacionalbackend.domain.model.enums.NombreRol;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class RolEntity {
 
     @Id
