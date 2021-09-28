@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 public class UsuarioResources {
 
-    public final static String AUTH = "/auth";
-    public final static String NEW_USER = "/new-use";
-    public final static String LOGIN = "/login";
-    public final static String REFRESH_TOKEN = "/refresh-token";
+    public static final String AUTH = "/auth";
+    public static final String NEW_USER = "/new-use";
+    public static final String LOGIN = "/login";
+    public static final String REFRESH_TOKEN = "/refresh-token";
 
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;

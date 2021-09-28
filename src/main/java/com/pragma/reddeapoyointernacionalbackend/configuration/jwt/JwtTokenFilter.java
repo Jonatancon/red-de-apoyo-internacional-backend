@@ -17,11 +17,11 @@ import java.io.IOException;
 
 public class JwtTokenFilter extends OncePerRequestFilter {
 
-    private final static Logger logger = LoggerFactory.getLogger(JwtTokenFilter.class);
+    private static final Logger loggerJwtTokenFilter = LoggerFactory.getLogger(JwtTokenFilter.class);
     private final JwtProvider jwtProvider;
     private final DetalleUsuarioServices detalleUsuarioServices;
-    private final static String HEADER = "Authorization";
-    private final static String BEARER = "Bearer";
+    private static final String HEADER = "Authorization";
+    private static final String BEARER = "Bearer";
 
     @Autowired
     public JwtTokenFilter(JwtProvider jwtProvider, DetalleUsuarioServices detalleUsuarioServices) {
@@ -45,7 +45,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
         }catch (Exception e) {
-            logger.error("Error en el metodo doFilter");
+            loggerJwtTokenFilter.error("Error en el metodo doFilter");
         }
     }
 

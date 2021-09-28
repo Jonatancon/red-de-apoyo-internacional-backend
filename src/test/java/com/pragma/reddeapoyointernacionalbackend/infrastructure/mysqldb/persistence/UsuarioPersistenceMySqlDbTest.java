@@ -2,6 +2,7 @@ package com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.persist
 
 import com.pragma.reddeapoyointernacionalbackend.domain.model.Usuario;
 import com.pragma.reddeapoyointernacionalbackend.domain.model.enums.NombreRol;
+import com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.daos.RolDao;
 import com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.daos.UsuarioDao;
 import com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.entities.RolEntity;
 import com.pragma.reddeapoyointernacionalbackend.infrastructure.mysqldb.entities.UsuarioEntity;
@@ -19,13 +20,14 @@ import java.util.Set;
 class UsuarioPersistenceMySqlDbTest {
 
     private final UsuarioDao usuarioDao = Mockito.mock(UsuarioDao.class);
+    private final RolDao rolDao = Mockito.mock(RolDao.class);
 
     RolEntity rols;
     Set<RolEntity> rol = new HashSet<>();
     UsuarioEntity usuarioEntity = new UsuarioEntity();
 
     @Autowired
-    private UsuarioPersistenceMySqlDb usuarioPersistenceMySqlDb = new UsuarioPersistenceMySqlDb(usuarioDao);
+    private UsuarioPersistenceMySqlDb usuarioPersistenceMySqlDb = new UsuarioPersistenceMySqlDb(usuarioDao, rolDao);
 
     @BeforeEach
     void setUp() {
