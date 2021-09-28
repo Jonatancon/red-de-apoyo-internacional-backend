@@ -65,7 +65,7 @@ public class UsuarioPersistenceMySqlDb implements UsuarioPersistence {
     private UsuarioEntity crearUsuarioEntity (Usuario usuario) {
         Set<RolEntity> roles = new HashSet<>();
 
-        if (usuario.getRol().contains(NombreRol.ANFITRION)) {
+        if (usuario.getRol().contains(Rol.builder().nombreRol(NombreRol.ANFITRION).build())) {
             rolDao.findByNombreRol(NombreRol.USUARIO).ifPresent(roles::add);
             rolDao.findByNombreRol(NombreRol.ANFITRION).ifPresent(roles::add);
         }else{
