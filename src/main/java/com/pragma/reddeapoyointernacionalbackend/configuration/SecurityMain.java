@@ -23,9 +23,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityMain extends WebSecurityConfigurerAdapter {
 
-    private DetalleUsuarioServices detalleUsuarioServices;
-    private JwtEntryPoint jwtEntryPoint;
-    private JwtProvider jwtProvider;
+    private final DetalleUsuarioServices detalleUsuarioServices;
+    private final JwtEntryPoint jwtEntryPoint;
+    private final JwtProvider jwtProvider;
 
     @Autowired
     public SecurityMain(DetalleUsuarioServices detalleUsuarioServices, JwtEntryPoint jwtEntryPoint,
@@ -54,11 +54,6 @@ public class SecurityMain extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-    }
-
-    @Override
-    protected AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
     }
 
     @Override

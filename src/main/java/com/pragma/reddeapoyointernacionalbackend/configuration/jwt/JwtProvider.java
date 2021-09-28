@@ -21,13 +21,15 @@ import java.util.stream.Collectors;
 @Component
 public class JwtProvider {
 
-    private final static Logger logger = LoggerFactory.getLogger(JwtProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
     @Value("${jwt.secret}")
     private String secret;
 
     @Value("${jwt.expiration}")
     private Long expiration;
+
+    private static final String ROLES = "roles";
 
     public String generarToken (Authentication authentication) {
         UsuarioPrincipal usuarioPrincipal = (UsuarioPrincipal) authentication.getPrincipal();
@@ -36,7 +38,7 @@ public class JwtProvider {
 
         return Jwts.builder().setSubject(usuarioPrincipal.getNombreUsuario())
                 .setIssuedAt(new Date())
-                .claim("roles", roles)
+                .claim(ROLES, roles)
                 .setExpiration(new Date(new Date().getTime() + this.expiration))
                 .signWith(SignatureAlgorithm.HS512, this.secret.getBytes())
                 .compact();
@@ -71,11 +73,11 @@ public class JwtProvider {
         JWT jwt = JWTParser.parse(jwtDto.getToken());
         JWTClaimsSet claimsSet = jwt.getJWTClaimsSet();
         String dni = claimsSet.getSubject();
-        List<String> roles = (List<String>) claimsSet.getClaim("roles");
+        List<String> roles = (List<String>) claimsSet.getClaim(ROLES);
 
         return Jwts.builder().setSubject(dni)
                 .setIssuedAt(new Date())
-                .claim("roles", roles)
+                .claim(ROLES, roles)
                 .setExpiration(new Date(new Date().getTime() + this.expiration))
                 .signWith(SignatureAlgorithm.HS512, this.secret.getBytes())
                 .compact();
