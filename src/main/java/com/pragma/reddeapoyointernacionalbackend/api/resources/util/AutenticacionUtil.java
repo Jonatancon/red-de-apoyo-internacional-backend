@@ -58,7 +58,7 @@ public class AutenticacionUtil {
         return new JwtDto(jwtProvider.generarToken(authentication));
     }
 
-    public JwtDto RefreshToken (JwtDto jwtDto) throws ParseException {
+    public JwtDto refreshToken (JwtDto jwtDto) throws ParseException {
         return new JwtDto(jwtProvider.refreshToken(jwtDto));
     }
 }

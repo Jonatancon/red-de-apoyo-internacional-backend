@@ -1,5 +1,5 @@
-dist: xenial
-sudo: true
+#dist: xenial
+#sudo: true
 language: java
 services:
   - mysql
@@ -14,15 +14,15 @@ notifications:
       - jhonatanlora2011@gmail.com
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-before_script:
-  - wget https://repo.mysql.com//mysql-apt-config_0.8.10-1_all.deb
-  - sudo dpkg -i mysql-apt-config_0.8.10-1_all.deb
-  - sudo apt-get update -q
-  - sudo apt-get install -q -y --allow-unauthenticated -o Dpkg::Options::=--force-confnew mysql-server
-  - sudo systemctl restart mysql
-  - sudo mysql_upgrade
-  - mysql --version
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS red_de_apoyo;'
+#before_script:
+  #- wget https://repo.mysql.com//mysql-apt-config_0.8.10-1_all.deb
+  #- sudo dpkg -i mysql-apt-config_0.8.10-1_all.deb
+  #- sudo apt-get update -q
+  #- sudo apt-get install -q -y --allow-unauthenticated -o Dpkg::Options::=--force-confnew mysql-server
+  #- sudo systemctl restart mysql
+  #- sudo mysql_upgrade
+  #- mysql --version
+  #- mysql -e 'CREATE DATABASE IF NOT EXISTS red_de_apoyo;'
 
     #addons:
  # sonarcloud:

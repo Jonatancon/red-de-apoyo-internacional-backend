@@ -49,10 +49,10 @@ public class SecurityMain extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    @Override
+    /*@Override
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
-    }
+    } ilogico llamrlo de nuevo si no se hace un cambio*/
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

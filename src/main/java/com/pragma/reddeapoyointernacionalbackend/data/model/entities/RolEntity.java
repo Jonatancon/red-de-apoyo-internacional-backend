@@ -19,6 +19,7 @@ public class RolEntity {
     private Integer idRol;
 
     @Column(name = "nombre_rol")
+    @Enumerated(EnumType.STRING)
     private NombreRol nombreRol;
 
     public Integer getIdRol() {

@@ -20,10 +20,10 @@ import java.text.ParseException;
 @CrossOrigin
 public class AuthenticationResource {
 
-    public final static String AUTH = "/auth";
-    public final static String NEW_USER = "/new-user";
-    public final static String LOGIN = "/login";
-    public final static String REFRESH_TOKEN = "/refresh-token";
+    public static final String AUTH = "/auth";
+    public static final String NEW_USER = "/new-user";
+    public static final String LOGIN = "/login";
+    public static final String REFRESH_TOKEN = "/refresh-token";
 
     @Autowired
     UsuarioService usuarioService;
@@ -32,12 +32,12 @@ public class AuthenticationResource {
     AutenticacionUtil autenticacionUtil;
 
     @PostMapping(NEW_USER)
-    public ResponseEntity<?> newUser(@Valid @RequestBody
+    public ResponseEntity<MessageDto> newUser(@Valid @RequestBody
                                              UsuarioDto usuarioDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(new MessageDto("Campos mal puestos"), HttpStatus.BAD_REQUEST);
 
-        if (usuarioService.existeNombeUsuario(usuarioDto.getNombreUsuario()))
+        if (Boolean.TRUE.equals(usuarioService.existeNombeUsuario(usuarioDto.getNombreUsuario()))) // cambio si no cambiar a tipo de dato normal
             return new ResponseEntity<>(new MessageDto("Ya se encuentra en uso"), HttpStatus.BAD_REQUEST);
 
         try{
@@ -49,7 +49,7 @@ public class AuthenticationResource {
     }
 
     @PostMapping(LOGIN)
-    public ResponseEntity<JwtDto> login (@Valid @RequestBody
+    public ResponseEntity<JwtDto> loginUsuario (@Valid @RequestBody
                                                  LoginUsuarioDto loginUsuarioDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(new JwtDto("Campos Mal Puestos"), HttpStatus.BAD_REQUEST);
@@ -63,6 +63,6 @@ public class AuthenticationResource {
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(new JwtDto("Sin Token"), HttpStatus.BAD_REQUEST);
 
-        return new ResponseEntity<>(autenticacionUtil.RefreshToken(jwtDto), HttpStatus.OK);
+        return new ResponseEntity<>(autenticacionUtil.refreshToken(jwtDto), HttpStatus.OK);
     }
 }

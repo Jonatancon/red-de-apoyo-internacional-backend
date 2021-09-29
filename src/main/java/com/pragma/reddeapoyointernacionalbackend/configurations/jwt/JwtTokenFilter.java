@@ -17,7 +17,7 @@ import java.io.IOException;
 
 public class JwtTokenFilter extends OncePerRequestFilter {
 
-    private static final Logger logger = LoggerFactory.getLogger(JwtTokenFilter.class);
+    private static final Logger loggerTokenFilter = LoggerFactory.getLogger(JwtTokenFilter.class);
 
     @Autowired
     JwtProvider jwtProvider;
@@ -44,7 +44,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(aut);
             }
         }catch (Exception e){
-            logger.error("Fallo en el metodo Dofilter");
+            loggerTokenFilter.error("Fallo en el metodo Dofilter");
         }
 
         filterChain.doFilter(request, response);
