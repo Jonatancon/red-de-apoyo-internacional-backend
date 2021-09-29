@@ -19,4 +19,8 @@ public class RolService {
     public Optional<RolEntity> getByNombreRol (NombreRol nombreRol) {
         return rolRepositoy.findByNombreRol(nombreRol);
     }
+
+    public void crearRol (RolEntity rolEntity) {
+        rolRepositoy.save(rolEntity);
+    }
 }
