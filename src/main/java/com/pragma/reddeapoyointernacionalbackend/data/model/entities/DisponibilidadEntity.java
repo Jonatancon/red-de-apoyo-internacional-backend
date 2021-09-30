@@ -28,4 +28,20 @@ public class DisponibilidadEntity {
     @JoinColumn(name = "fk_casa")
     @ManyToOne
     private CasaEntity casaEntity;
+
+    public Integer getIdDisponibilidad() {
+        return idDisponibilidad;
+    }
+
+    public String getFechaLlegada() {
+        return fechaLlegada;
+    }
+
+    public String getFechaSalida() {
+        return fechaSalida;
+    }
+
+    public CasaEntity getCasaEntity() {
+        return casaEntity;
+    }
 }

@@ -26,10 +26,10 @@ public class AuthenticationResource {
     public static final String REFRESH_TOKEN = "/refresh-token";
 
     @Autowired
-    UsuarioService usuarioService;
+    private UsuarioService usuarioService;
 
     @Autowired
-    AutenticacionUtil autenticacionUtil;
+    private AutenticacionUtil autenticacionUtil;
 
     @PostMapping(NEW_USER)
     public ResponseEntity<MessageDto> newUser(@Valid @RequestBody

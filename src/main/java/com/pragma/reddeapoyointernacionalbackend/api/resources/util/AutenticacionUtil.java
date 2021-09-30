@@ -24,16 +24,16 @@ import java.util.Set;
 public class AutenticacionUtil {
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    JwtProvider jwtProvider;
+    private JwtProvider jwtProvider;
 
     @Autowired
-    RolService rolService;
+    private RolService rolService;
 
     public  UsuarioEntity crearUsuario (UsuarioDto usuarioDto) {
         Set<RolEntity> roles = new HashSet<>();

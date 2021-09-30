@@ -11,10 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class UsuarioService {
 
     @Autowired
-    UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
 
-    public void crearUsuario (UsuarioEntity usuarioEntity) {
-        usuarioRepository.save(usuarioEntity);
+    public UsuarioEntity crearUsuario (UsuarioEntity usuarioEntity) {
+        return usuarioRepository.save(usuarioEntity);
     }
 
     public Boolean existeNombeUsuario (String nombreUsuario) {
