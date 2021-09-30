@@ -14,13 +14,13 @@ import java.util.Optional;
 public class RolService {
 
     @Autowired
-    RolRepositoy rolRepositoy;
+    private RolRepositoy rolRepositoy;
 
     public Optional<RolEntity> getByNombreRol (NombreRol nombreRol) {
         return rolRepositoy.findByNombreRol(nombreRol);
     }
 
-    public void crearRol (RolEntity rolEntity) {
-        rolRepositoy.save(rolEntity);
+    public RolEntity crearRol (RolEntity rolEntity) {
+        return rolRepositoy.save(rolEntity);
     }
 }

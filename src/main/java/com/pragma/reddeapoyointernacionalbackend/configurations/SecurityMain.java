@@ -23,10 +23,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityMain extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    DetalleUsuarioService detalleUsuarioService;
+    private DetalleUsuarioService detalleUsuarioService;
 
     @Autowired
-    JwtEntryPoint jwtEntryPoint;
+    private JwtEntryPoint jwtEntryPoint;
 
     @Bean
     public JwtTokenFilter jwtTokenFilter () {
@@ -48,11 +48,6 @@ public class SecurityMain extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-    /*@Override
-    protected AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
-    } ilogico llamrlo de nuevo si no se hace un cambio*/
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

@@ -36,14 +36,6 @@ public class UsuarioEntity {
     inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<RolEntity> rolEntity = new HashSet<>();
 
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
     public String getNombreUsuario() {
         return nombreUsuario;
     }
@@ -64,31 +56,15 @@ public class UsuarioEntity {
         return nombreCompleto;
     }
 
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
-    }
-
     public String getCiudad() {
         return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
     }
 
     public String getPais() {
         return pais;
     }
 
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
     public Set<RolEntity> getRolEntity() {
         return rolEntity;
-    }
-
-    public void setRolEntity(Set<RolEntity> rolEntity) {
-        this.rolEntity = rolEntity;
     }
 }

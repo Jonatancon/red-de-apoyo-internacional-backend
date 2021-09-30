@@ -26,15 +26,8 @@ public class RolEntity {
         return idRol;
     }
 
-    public void setIdRol(Integer idRol) {
-        this.idRol = idRol;
-    }
-
     public NombreRol getNombreRol() {
         return nombreRol;
     }
 
-    public void setNombreRol(NombreRol nombreRol) {
-        this.nombreRol = nombreRol;
-    }
 }
