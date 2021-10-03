@@ -2,7 +2,6 @@ package com.pragma.reddeapoyointernacionalbackend.data.model;
 
 import com.pragma.reddeapoyointernacionalbackend.data.model.entities.UsuarioEntity;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,7 +11,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UsuarioPrincipal implements UserDetails {
@@ -65,5 +63,21 @@ public class UsuarioPrincipal implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public String getPais() {
+        return pais;
     }
 }
