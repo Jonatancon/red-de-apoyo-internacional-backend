@@ -35,55 +35,27 @@ public class CasaEntity {
         return idCasa;
     }
 
-    public void setIdCasa(Integer idCasa) {
-        this.idCasa = idCasa;
-    }
-
     public String getDireccion() {
         return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
     }
 
     public String getCiudad() {
         return ciudad;
     }
 
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
     public String getPais() {
         return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
     }
 
     public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
     public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
-
     public UsuarioEntity getUsuarioEntity() {
         return usuarioEntity;
-    }
-
-    public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
-        this.usuarioEntity = usuarioEntity;
     }
 }
