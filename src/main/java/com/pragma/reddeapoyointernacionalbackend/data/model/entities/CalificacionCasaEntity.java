@@ -34,39 +34,19 @@ public class CalificacionCasaEntity {
         return idCalificacionCasa;
     }
 
-    public void setIdCalificacionCasa(Integer idCalificacionCasa) {
-        this.idCalificacionCasa = idCalificacionCasa;
-    }
-
     public String getComentario() {
         return comentario;
-    }
-
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
     }
 
     public Integer getCalificacionCasa() {
         return calificacionCasa;
     }
 
-    public void setCalificacionCasa(Integer calificacionCasa) {
-        this.calificacionCasa = calificacionCasa;
-    }
-
     public Integer getCalificacionAnfitrion() {
         return calificacionAnfitrion;
     }
 
-    public void setCalificacionAnfitrion(Integer calificacionAnfitrion) {
-        this.calificacionAnfitrion = calificacionAnfitrion;
-    }
-
     public CasaEntity getCasa() {
         return casa;
-    }
-
-    public void setCasa(CasaEntity casa) {
-        this.casa = casa;
     }
 }

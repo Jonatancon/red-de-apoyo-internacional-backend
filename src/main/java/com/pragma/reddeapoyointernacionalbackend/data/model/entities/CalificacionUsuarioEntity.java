@@ -30,31 +30,16 @@ public class CalificacionUsuarioEntity {
         return idCalificacionUsuario;
     }
 
-    public void setIdCalificacionUsuario(Integer idCalificacionUsuario) {
-        this.idCalificacionUsuario = idCalificacionUsuario;
-    }
-
     public String getComentario() {
         return comentario;
-    }
-
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
     }
 
     public Integer getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(Integer calificacion) {
-        this.calificacion = calificacion;
-    }
-
     public UsuarioEntity getUsuarioEntity() {
         return usuarioEntity;
     }
 
-    public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
-        this.usuarioEntity = usuarioEntity;
-    }
 }

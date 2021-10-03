@@ -1,10 +1,10 @@
 package com.pragma.reddeapoyointernacionalbackend.api.resources.util;
 
-import com.pragma.reddeapoyointernacionalbackend.api.dtos.JwtDto;
 import com.pragma.reddeapoyointernacionalbackend.api.dtos.LoginUsuarioDto;
 import com.pragma.reddeapoyointernacionalbackend.api.dtos.UsuarioDto;
 import com.pragma.reddeapoyointernacionalbackend.configurations.jwt.JwtProvider;
 import com.pragma.reddeapoyointernacionalbackend.data.model.entities.RolEntity;
+import com.pragma.reddeapoyointernacionalbackend.data.model.entities.UsuarioEntity;
 import com.pragma.reddeapoyointernacionalbackend.data.model.enums.NombreRol;
 import com.pragma.reddeapoyointernacionalbackend.domain.services.RolService;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +20,7 @@ import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.*;
@@ -77,6 +77,28 @@ class AutenticacionUtilTest {
         when(jwtProvider.refreshToken(any())).thenReturn(token);
 
         assertNotNull(autenticacionUtil.refreshToken(any()));
+    }
+
+    @Test
+    void crearUsuarioSinAnfitrion(){
+        when(rolService.getByNombreRol(NombreRol.USUARIO))
+                .thenReturn(Optional.of(new RolEntity(1, NombreRol.USUARIO)));
+        when(passwordEncoder.encode(any())).thenReturn("password");
+
+        Set<String> roles = new HashSet<>();
+        roles.add("usuario");
+        UsuarioDto usuarioMockDto = new UsuarioDto();
+        usuarioMockDto.setNombreUsuario("jrstark");
+        usuarioMockDto.setNombreCompleto("Jonatan Restrepo");
+        usuarioMockDto.setPais("Colombia");
+        usuarioMockDto.setCiudad("Medellin");
+        usuarioMockDto.setPassword("123");
+        usuarioMockDto.setRoles(roles);
+
+        UsuarioEntity usuarioMock = autenticacionUtil.crearUsuario(usuarioMockDto);
+
+        assertEquals(NombreRol.USUARIO,
+                usuarioMock.getRolEntity().stream().collect(Collectors.toList()).get(0).getNombreRol());
     }
 
     private UsuarioDto crearUsuarioDto() {
