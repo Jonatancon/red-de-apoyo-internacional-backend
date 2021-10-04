@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 public class UsuarioService {
@@ -19,6 +21,10 @@ public class UsuarioService {
 
     public Boolean existeNombeUsuario (String nombreUsuario) {
         return usuarioRepository.existsByNombreUsuario(nombreUsuario);
+    }
+
+    public Optional<UsuarioEntity> getUsuarioFromNombreUsuario (String nombreUsuario) {
+        return usuarioRepository.findByNombreUsuario(nombreUsuario);
     }
 
 }
