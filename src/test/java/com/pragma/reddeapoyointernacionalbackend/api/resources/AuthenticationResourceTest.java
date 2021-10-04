@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.exceptions.base.MockitoException;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -49,6 +50,26 @@ class AuthenticationResourceTest {
 
     @BeforeEach
     void setUp() {
+
+    }
+
+    @Test
+    void newUserErrorInterno() {
+        when(usuarioService.crearUsuario(any())).thenThrow(MockitoException.class);
+        when(usuarioService.existeNombeUsuario(any())).thenReturn(Boolean.FALSE);
+        when(bindingResult.hasErrors()).thenReturn(false);
+        when(autenticacionUtil.crearUsuario(any())).thenReturn(null);
+
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
+        ResponseEntity<MessageDto> responseEntity =
+                authenticationResource.newUser(crearUsuarioDto(), bindingResult);
+
+        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(500);
+        assertThat(responseEntity.getBody().getMessage())
+                .isEqualTo("Oooops... org.mockito.exceptions.base.MockitoException");
+
     }
 
     @Test
