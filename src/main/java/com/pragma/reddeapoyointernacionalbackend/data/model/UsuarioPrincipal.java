@@ -2,7 +2,6 @@ package com.pragma.reddeapoyointernacionalbackend.data.model;
 
 import com.pragma.reddeapoyointernacionalbackend.data.model.entities.UsuarioEntity;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-@NoArgsConstructor
 public class UsuarioPrincipal implements UserDetails {
 
     private String nombreUsuario;
