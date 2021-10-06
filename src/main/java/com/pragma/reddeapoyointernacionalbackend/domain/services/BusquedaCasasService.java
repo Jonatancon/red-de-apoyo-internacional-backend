@@ -35,8 +35,6 @@ public class BusquedaCasasService {
     public List<CasaEntity> obtenerPorFecha (String fechaReserva) {
         List<CasaEntity> casasFiltradas = casaRepository.findAll();
 
-       // casasFiltradas.removeAll(disponible.obtenerCasaOcupadasPorFecha(fechaReserva));
-
         disponible.obtenerCasaOcupadasPorFecha(fechaReserva)
                 .forEach(casaEntity ->
                         casasFiltradas.removeIf(casa -> casa.getIdCasa().equals(casaEntity.getIdCasa())));

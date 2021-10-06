@@ -11,6 +11,7 @@
 
 ### Estado del código
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.pragma%3Ared-de-apoyo-internacional-backend&metric=coverage)](https://sonarcloud.io/dashboard?id=com.pragma%3Ared-de-apoyo-internacional-backend)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.pragma%3Ared-de-apoyo-internacional-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.pragma%3Ared-de-apoyo-internacional-backend)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=com.pragma%3Ared-de-apoyo-internacional-backend&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=com.pragma%3Ared-de-apoyo-internacional-backend)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=com.pragma%3Ared-de-apoyo-internacional-backend&metric=security_rating)](https://sonarcloud.io/dashboard?id=com.pragma%3Ared-de-apoyo-internacional-backend)
