@@ -1,5 +1,6 @@
 package com.pragma.reddeapoyointernacionalbackend.api.resources.util;
 
+import com.pragma.reddeapoyointernacionalbackend.configurations.jwt.JwtProvider;
 import com.pragma.reddeapoyointernacionalbackend.data.model.entities.RolEntity;
 import com.pragma.reddeapoyointernacionalbackend.data.model.entities.UsuarioEntity;
 import com.pragma.reddeapoyointernacionalbackend.data.model.enums.NombreRol;
@@ -23,6 +24,9 @@ class BusquedasUtilTest {
     @Mock
     UsuarioService usuarioService;
 
+    @Mock
+    JwtProvider jwtProvider;
+
     @InjectMocks
     BusquedasUtil busquedasUtil;
 
@@ -34,6 +38,7 @@ class BusquedasUtilTest {
     @Test
     void obtenerUsuarioEntityFromNombreUsuario() {
         when(usuarioService.getUsuarioFromNombreUsuario(anyString())).thenReturn(crearUsuarioMock());
+        when(jwtProvider.getNombreUsuarioFromToken(anyString())).thenReturn("jrstark");
 
         assertNotNull(busquedasUtil.obtenerUsuarioEntityFromNombreUsuario(anyString()));
     }

@@ -13,8 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping(CasaResources.CASA)
@@ -22,7 +20,6 @@ import java.util.List;
 public class CasaResources {
     public static final String CASA = "/viajes/casa";
     public static final String GUARDAR = "/save";
-    public static final String OBTENER_TODAS_LAS_CASAS = "/alls-casas";
 
     @Autowired
     private BusquedasUtil busquedasUtil;
@@ -33,40 +30,24 @@ public class CasaResources {
     @PostMapping(GUARDAR)
     @PreAuthorize("hasAnyRole('ANFITRION')")
     public ResponseEntity<MessageDto> guardarNuevaCasa(@Valid @RequestBody CasaDto casaDto,
-                                                       BindingResult bindingResult) {
+                                                       BindingResult bindingResult,
+                                                       @RequestHeader(value = "Authorization") String token) {
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(new MessageDto("Campos Incorrectos"), HttpStatus.BAD_REQUEST);
 
         try{
-            casaService.crearUnaCasa(crearCasaEtity(casaDto));
+            casaService.crearUnaCasa(crearCasaEtity(casaDto, token));
             return new ResponseEntity<>(new MessageDto("Casa Guardada"), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(new MessageDto("Oooops... " + e), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping(OBTENER_TODAS_LAS_CASAS)
-    public ResponseEntity<List<CasaDto>> obtenerCasas () {
-
-        return new ResponseEntity<>(organizarLista(casaService.todasLasCasas()), HttpStatus.OK);
-    }
-
-    private List<CasaDto> organizarLista(List<CasaEntity> casas){
-        List<CasaDto> addCasa = new ArrayList<>();
-        casas.forEach(casaEntity -> {
-            CasaDto casa =  CasaDto.builder().nombreUsuario(casaEntity.getUsuarioEntity().getNombreUsuario())
-                    .ciudad(casaEntity.getCiudad()).pais(casaEntity.getPais()).direccion(casaEntity.getDireccion())
-                    .telefono(casaEntity.getTelefono()).foto(casaEntity.getFoto()).build();
-            addCasa.add(casa);
-        });
-        return addCasa;
-    }
-
-    private CasaEntity crearCasaEtity (CasaDto casaDto) {
+    private CasaEntity crearCasaEtity (CasaDto casaDto, String token) {
         return CasaEntity.builder().idCasa(null).ciudad(casaDto.getCiudad()).pais(casaDto.getPais())
                 .direccion(casaDto.getDireccion()).telefono(casaDto.getTelefono())
-                .foto(casaDto.getFoto())
-                .usuarioEntity(busquedasUtil.obtenerUsuarioEntityFromNombreUsuario(casaDto.getNombreUsuario()))
+                .foto(casaDto.getFoto()).estado(casaDto.getEstado())
+                .usuarioEntity(busquedasUtil.obtenerUsuarioEntityFromNombreUsuario(token))
                 .build();
     }
 

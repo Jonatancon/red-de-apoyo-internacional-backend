@@ -29,6 +29,14 @@ public class DisponibilidadEntity {
     @ManyToOne
     private CasaEntity casaEntity;
 
+    @JoinColumn(name = "fk_usuario_reservado")
+    @ManyToOne
+    private UsuarioEntity usuarioEntity;
+
+    public UsuarioEntity getUsuarioEntity() {
+        return usuarioEntity;
+    }
+
     public Integer getIdDisponibilidad() {
         return idDisponibilidad;
     }
