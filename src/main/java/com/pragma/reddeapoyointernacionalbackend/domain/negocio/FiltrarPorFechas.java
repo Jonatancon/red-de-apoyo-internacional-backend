@@ -25,14 +25,10 @@ public class FiltrarPorFechas {
     }
 
     private boolean aceptado(String[] fechaInicio, String[] fechaFinal, String[] fechaFiltrada) {
-        long rangoInfererior, rangoSuperior, numero;
+        long rangoInfererior = Integer.parseInt(fechaInicio[2] + fechaInicio[1] + fechaInicio[0]);
+        long rangoSuperior = Integer.parseInt(fechaFinal[2] + fechaFinal[1] + fechaFinal[0]);
+        long numero = Integer.parseInt(fechaFiltrada[2] + fechaFiltrada[1] + fechaFiltrada[0]);
 
-        rangoInfererior = Integer.parseInt(fechaInicio[2] + fechaInicio[1] + fechaInicio[0]);
-        rangoSuperior = Integer.parseInt(fechaFinal[2] + fechaFinal[1] + fechaFinal[0]);
-        numero = Integer.parseInt(fechaFiltrada[2] + fechaFiltrada[1] + fechaFiltrada[0]);
-
-        if (rangoInfererior <= numero && numero <= rangoSuperior)
-            return true;
-        return false;
+        return rangoInfererior <= numero && numero <= rangoSuperior;
     }
 }

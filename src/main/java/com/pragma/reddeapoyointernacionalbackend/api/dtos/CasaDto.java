@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class CasaDto {
 
-    private Integer idCasa;
+    private String idCasa;
 
     @NotNull
     @NotBlank
@@ -32,6 +32,10 @@ public class CasaDto {
 
     private byte[] foto;
 
+    private UsuarioDto usuarioDto;
+
+    public UsuarioDto getUsuarioDto() {return usuarioDto;}
+
     public String getDireccion() {
         return direccion;
     }
@@ -54,5 +58,9 @@ public class CasaDto {
 
     public String getEstado() {
         return estado;
+    }
+
+    public String getIdCasa() {
+        return idCasa;
     }
 }
