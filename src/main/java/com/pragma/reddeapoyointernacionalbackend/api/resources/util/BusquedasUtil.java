@@ -1,5 +1,6 @@
 package com.pragma.reddeapoyointernacionalbackend.api.resources.util;
 
+import com.pragma.reddeapoyointernacionalbackend.configurations.jwt.JwtProvider;
 import com.pragma.reddeapoyointernacionalbackend.data.model.entities.UsuarioEntity;
 import com.pragma.reddeapoyointernacionalbackend.domain.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,12 @@ public class BusquedasUtil {
     @Autowired
     private UsuarioService usuarioService;
 
-    public UsuarioEntity obtenerUsuarioEntityFromNombreUsuario (String nombreUsuario) {
+    @Autowired
+    private JwtProvider jwtProvider;
+
+    public UsuarioEntity obtenerUsuarioEntityFromNombreUsuario (String token) {
+        String nombreUsuario = jwtProvider.getNombreUsuarioFromToken(token);
+
         Optional<UsuarioEntity> user = usuarioService.getUsuarioFromNombreUsuario(nombreUsuario);
 
         return user.orElse(null);

@@ -19,11 +19,13 @@ class CasaEntityTest {
         assertNull(casa.getFoto());
         assertNull(casa.getUsuarioEntity());
         assertEquals("2020", casa.getDireccion());
+        assertEquals("Antioquia", casa.getEstado());
     }
 
     private void crearCasa () {
         casa = CasaEntity.builder().idCasa(1).ciudad("Medellin").pais("Colombia")
-                .telefono("123").direccion("2020").foto(null).usuarioEntity(null).build();
+                .telefono("123").direccion("2020").foto(null)
+                .usuarioEntity(null).estado("Antioquia").build();
     }
 
 }

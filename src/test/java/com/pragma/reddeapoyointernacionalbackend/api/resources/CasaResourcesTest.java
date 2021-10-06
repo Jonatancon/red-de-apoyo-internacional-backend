@@ -47,6 +47,8 @@ class CasaResourcesTest {
     @InjectMocks
     CasaResources casaResources;
 
+    String token = "jrstark";
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -60,7 +62,7 @@ class CasaResourcesTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
         ResponseEntity<MessageDto> responseEntity =
-                casaResources.guardarNuevaCasa(crearCasaDto(), bindingResult);
+                casaResources.guardarNuevaCasa(crearCasaDto(), bindingResult, token);
 
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(400);
         assertThat(responseEntity.getBody().getMessage()).isEqualTo("Campos Incorrectos");
@@ -76,7 +78,7 @@ class CasaResourcesTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
         ResponseEntity<MessageDto> responseEntity =
-                casaResources.guardarNuevaCasa(crearCasaDto(), bindingResult);
+                casaResources.guardarNuevaCasa(crearCasaDto(), bindingResult, token);
 
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
         assertThat(responseEntity.getBody().getMessage()).isEqualTo("Casa Guardada");
@@ -91,28 +93,14 @@ class CasaResourcesTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
         ResponseEntity<MessageDto> responseEntity =
-                casaResources.guardarNuevaCasa(crearCasaDto(), bindingResult);
+                casaResources.guardarNuevaCasa(crearCasaDto(), bindingResult, token);
 
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(500);
         assertThat(responseEntity.getBody().getMessage()).isEqualTo("Oooops... org.mockito.exceptions.base.MockitoException");
     }
 
-    @Test
-    void obtenerCasas() {
-        when(casaService.todasLasCasas()).thenReturn(crearLista());
-
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-
-        ResponseEntity<List<CasaDto>> responseEntity =
-                casaResources.obtenerCasas();
-
-        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
-        assertEquals("jrstark", responseEntity.getBody().get(0).getNombreUsuario());
-    }
-
     private CasaDto crearCasaDto() {
-        return CasaDto.builder().nombreUsuario("jrstark").foto(new byte[2]).pais("Colombia")
+        return CasaDto.builder().foto(new byte[2]).pais("Colombia").estado("Antioquia")
                 .ciudad("Medellin").direccion("2020").telefono("123").build();
     }
 
@@ -124,13 +112,5 @@ class CasaResourcesTest {
         return Optional.of( UsuarioEntity.builder().idUsuario(1).nombreUsuario("jrstark")
                 .password("123").nombreCompleto("Jonatan Restrepo").pais("colombia")
                 .ciudad("Medellin").rolEntity(roles).build() );
-    }
-
-    private List<CasaEntity> crearLista() {
-        List<CasaEntity> casasAdd = new ArrayList<>();
-        CasaEntity casa = CasaEntity.builder().usuarioEntity(crearUsuarioMock().get())
-                .ciudad("Medellin").build();
-        casasAdd.add(casa);
-        return casasAdd;
     }
 }

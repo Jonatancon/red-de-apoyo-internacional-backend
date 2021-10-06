@@ -19,6 +19,8 @@ public class CasaEntity {
 
     private String direccion;
 
+    private String estado;
+
     private String ciudad;
 
     private String pais;
@@ -53,6 +55,10 @@ public class CasaEntity {
 
     public byte[] getFoto() {
         return foto;
+    }
+
+    public String getEstado() {
+        return estado;
     }
 
     public UsuarioEntity getUsuarioEntity() {
