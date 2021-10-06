@@ -30,11 +30,12 @@ class TransformarDatosUtilTest {
     }
 
     @Test
-    void listaCasasDto() {
+    void listaCasasDto() throws Exception {
+        when(codificador.encript(anyString())).thenReturn("clave");
         assertNotNull(tranform.listaCasasDto(listaCasa()));
         assertEquals("Medellin", tranform.listaCasasDto(listaCasa()).get(0)
                 .getUsuarioDto().getCiudad());
-        assertEquals("OMeqgemheR9X2XPJSRKQUg==", tranform.listaCasasDto(listaCasa()).get(0)
+        assertEquals("clave", tranform.listaCasasDto(listaCasa()).get(0)
                 .getIdCasa());
     }
 
