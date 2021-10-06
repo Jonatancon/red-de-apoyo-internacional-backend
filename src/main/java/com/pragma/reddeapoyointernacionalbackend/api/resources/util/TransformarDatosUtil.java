@@ -23,7 +23,7 @@ public class TransformarDatosUtil {
                         .usuarioDto(crearUsuarioDto(casa.getUsuarioEntity())).foto(casa.getFoto()).build()
                 );
             } catch (Exception e) {
-                e.printStackTrace();
+                addCasa.add(CasaDto.builder().idCasa("Error....Clave").build());
             }
         });
         return addCasa;
