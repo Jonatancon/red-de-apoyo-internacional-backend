@@ -7,7 +7,7 @@ import java.util.Base64;
 
 public class CodificadorUtil {
 
-    private static final String  ENCRYPT_KEY="KatenKyōkotsu: KaramatsuShinjū";
+    private static final String  ENCRYPT_KEY="-Katen-Kyokotsu-KaramatsuShinju-";
 
     protected   String encript(String text) throws Exception {
         Key aesKey = new SecretKeySpec(ENCRYPT_KEY.getBytes(), "AES");

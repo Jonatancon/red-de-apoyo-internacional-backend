@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 class CasaServiceTest {
@@ -47,6 +49,13 @@ class CasaServiceTest {
         when(casaRepository.findAll()).thenReturn(addCasa);
 
         assertNotNull(casaService.todasLasCasas());
+    }
+
+    @Test
+    void buscarUnaCasa() {
+        when(casaRepository.findById(anyInt())).thenReturn(Optional.of(crearCasa()));
+
+        assertNotNull(casaService.buscarCasa(1));
     }
 
     private CasaEntity crearCasa() {

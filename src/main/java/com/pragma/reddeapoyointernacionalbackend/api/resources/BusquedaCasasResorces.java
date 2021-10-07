@@ -17,10 +17,10 @@ public class BusquedaCasasResorces {
 
     public static final String BUSQUEDA_CENTRAL = "/viajes";
     public static final String BUSQUEDA = "/busquedas/casas";
-    public static final String B_PAIS = "/{pais}";
-    public static final String B_CIUDAD = "/{ciudad}";
-    public static final String B_ESTADO = "/{estado}";
-    public static final String B_FECHA = "/{fecha}";
+    public static final String B_PAIS = "/pais/{pais}";
+    public static final String B_CIUDAD = "/ciudad/{ciudad}";
+    public static final String B_ESTADO = "/estado/{estado}";
+    public static final String B_FECHA = "/fecha/{fecha}";
 
     @Autowired
     private BusquedaCasasService busquedaCasasService;
