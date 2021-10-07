@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 class DisponibilidadServiceTest {
@@ -32,6 +34,27 @@ class DisponibilidadServiceTest {
     void obtenerCasaOcupadasPorFecha() {
         when(disponibilidadRepository.findAll()).thenReturn(listaDeCasa(3));
         assertNotNull(disponibilidadService.obtenerCasaOcupadasPorFecha("11/12/2021"));
+    }
+
+    @Test
+    void existeCasaAlquiladaEnFechaDisponible() {
+        when(disponibilidadRepository.findAllByCasaEntity_IdCasa(anyInt())).thenReturn(listaDeCasa(3));
+
+        assertTrue(disponibilidadService.existeCasaAlquiladaEnFecha(1,"01/12/2020"));
+    }
+
+    @Test
+    void existeCasaAlquiladaOcupada(){
+        when(disponibilidadRepository.findAllByCasaEntity_IdCasa(anyInt())).thenReturn(listaDeCasa(3));
+
+        assertFalse(disponibilidadService.existeCasaAlquiladaEnFecha(1,"11/12/2020"));
+    }
+
+    @Test
+    void crearUnaReserva() {
+        when(disponibilidadRepository.save(any())).thenReturn(listaDeCasa(1).get(0));
+
+        assertNotNull(disponibilidadService.crearNuevaReserva(any(DisponibilidadEntity.class)));
     }
 
     private CasaEntity crearCasaEntity(int numeroCasa) {

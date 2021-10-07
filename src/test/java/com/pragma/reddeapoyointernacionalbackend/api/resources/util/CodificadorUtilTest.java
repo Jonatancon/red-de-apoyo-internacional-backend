@@ -24,6 +24,6 @@ class CodificadorUtilTest {
 
     @Test
     void decrypt() throws Exception {
-        assertEquals("21", codificadorUtil.decrypt("Sd5d1dvvTp/lRBUhpUfutg=="));
+        assertEquals("21", codificadorUtil.decrypt("caiqBF76ZOPfe7yuCxbQIw=="));
     }
 }
