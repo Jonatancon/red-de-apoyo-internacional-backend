@@ -27,6 +27,7 @@ public class CasaEntity {
 
     private String telefono;
 
+    @Lob
     private byte[] foto;
 
     @JoinColumn(name = "fk_propietario")

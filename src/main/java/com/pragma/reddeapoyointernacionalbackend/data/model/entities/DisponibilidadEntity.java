@@ -33,6 +33,10 @@ public class DisponibilidadEntity {
     @ManyToOne
     private UsuarioEntity usuarioEntity;
 
+    private boolean calificoUsuario;
+
+    private boolean calificoAnfritrion;
+
     public UsuarioEntity getUsuarioEntity() {
         return usuarioEntity;
     }
@@ -51,5 +55,13 @@ public class DisponibilidadEntity {
 
     public CasaEntity getCasaEntity() {
         return casaEntity;
+    }
+
+    public boolean isCalificoUsuario() {
+        return calificoUsuario;
+    }
+
+    public boolean isCalificoAnfritrion() {
+        return calificoAnfritrion;
     }
 }
