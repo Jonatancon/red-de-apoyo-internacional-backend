@@ -49,7 +49,8 @@ public class TransformarDatosUtil {
 
         return DisponibilidadEntity.builder().fechaLlegada(alquilerDto.getFechaInicio())
                 .fechaSalida(alquilerDto.getFechaFinal()).casaEntity(casa)
-                .usuarioEntity(user).idDisponibilidad(null).build();
+                .usuarioEntity(user).idDisponibilidad(null)
+                .calificoUsuario(false).calificoAnfritrion(false).build();
     }
 
 }

@@ -27,33 +27,33 @@ public class BusquedaCasasResorces {
 
     private final TransformarDatosUtil dataTranform = new TransformarDatosUtil();
 
-    @GetMapping(BUSQUEDA_CENTRAL + BUSQUEDA)
+    @GetMapping()
     public ResponseEntity<List<CasaDto>> buscarTodasLasCasas() {
 
         return new ResponseEntity<>(dataTranform.listaCasasDto(busquedaCasasService.obtenerTodasLasCasas()),
                 HttpStatus.OK);
     }
 
-    @GetMapping(BUSQUEDA + B_PAIS)
+    @GetMapping(B_PAIS)
     public ResponseEntity<List<CasaDto>> bucarPorPais (@PathVariable String pais) {
 
         return new ResponseEntity<>(dataTranform.listaCasasDto(busquedaCasasService.obtenerPorPais(pais)),
                 HttpStatus.OK);
     }
 
-    @GetMapping(BUSQUEDA + B_CIUDAD)
+    @GetMapping(B_CIUDAD)
     public ResponseEntity<List<CasaDto>> bucarPorCiudad (@PathVariable String ciudad) {
         return new ResponseEntity<>(dataTranform.listaCasasDto(busquedaCasasService.obtenerPorCiudad(ciudad)),
                 HttpStatus.OK);
     }
 
-    @GetMapping(BUSQUEDA + B_ESTADO)
+    @GetMapping(B_ESTADO)
     public ResponseEntity<List<CasaDto>> bucarPorEstado (@PathVariable String estado) {
         return new ResponseEntity<>(dataTranform.listaCasasDto(busquedaCasasService.obtenerPorEstado(estado)),
                 HttpStatus.OK);
     }
 
-    @GetMapping(BUSQUEDA + B_FECHA)
+    @GetMapping(B_FECHA)
     public ResponseEntity<List<CasaDto>> bucarPorFecha (@PathVariable String fecha) {
         return new ResponseEntity<>(dataTranform.listaCasasDto(busquedaCasasService.obtenerPorFecha(fecha)),
                 HttpStatus.OK);

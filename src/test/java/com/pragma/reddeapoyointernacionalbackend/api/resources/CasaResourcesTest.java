@@ -24,6 +24,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -49,6 +50,9 @@ class CasaResourcesTest {
 
     String token = "jrstark";
 
+    @Mock
+    MultipartFile archivo;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -62,7 +66,7 @@ class CasaResourcesTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
         ResponseEntity<MessageDto> responseEntity =
-                casaResources.guardarNuevaCasa(crearCasaDto(), bindingResult, token);
+                casaResources.guardarNuevaCasa(crearCasaDto(), bindingResult, archivo , token);
 
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(400);
         assertThat(responseEntity.getBody().getMessage()).isEqualTo("Campos Incorrectos");
@@ -78,7 +82,7 @@ class CasaResourcesTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
         ResponseEntity<MessageDto> responseEntity =
-                casaResources.guardarNuevaCasa(crearCasaDto(), bindingResult, token);
+                casaResources.guardarNuevaCasa(crearCasaDto(), bindingResult, archivo , token);
 
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
         assertThat(responseEntity.getBody().getMessage()).isEqualTo("Casa Guardada");
@@ -93,7 +97,7 @@ class CasaResourcesTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
         ResponseEntity<MessageDto> responseEntity =
-                casaResources.guardarNuevaCasa(crearCasaDto(), bindingResult, token);
+                casaResources.guardarNuevaCasa(crearCasaDto(), bindingResult, archivo , token);
 
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(500);
         assertThat(responseEntity.getBody().getMessage()).isEqualTo("Oooops... org.mockito.exceptions.base.MockitoException");
