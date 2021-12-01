@@ -44,12 +44,14 @@ jobs:
                   "accessory": {
                     "type": "image",
                     "image_url": "https://cdn.pixabay.com/photo/2016/09/16/19/14/coffee-1674884_960_720.png",
-                    "alt_text": "cute cat"
+                    "alt_text": "compiled"
                   }
                 }
               ]
             }' # default is { "text": "Content not set" }
-      - if: ${{ job.status != 'success' }}
+      - name: slack-webhook-payload
+        uses: alonsohki/slack-webhook-payload@v1
+        if: ${{ job.status != 'success' }}
         with:
           slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
           content:
@@ -72,7 +74,7 @@ jobs:
                   "accessory": {
                     "type": "image",
                     "image_url": "https://cdn.pixabay.com/photo/2019/03/07/23/55/ncorrect-answer-4041502_960_720.png",
-                    "alt_text": "cute cat"
+                    "alt_text": "error"
                   }
                 }
               ]
