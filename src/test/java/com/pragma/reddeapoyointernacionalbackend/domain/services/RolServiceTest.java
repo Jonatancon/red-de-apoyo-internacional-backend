@@ -18,10 +18,12 @@ import static org.mockito.Mockito.when;
 class RolServiceTest {
 
     @Mock
-    RolRepositoy rolRepositoy;
+    private RolRepositoy rolRepositoy;
 
     @InjectMocks
-    RolService rolService;
+    private RolService rolService;
+
+    private final RolEntity rol = RolEntity.builder().idRol(1).nombreRol(NombreRol.ANFITRION).build();
 
     @BeforeEach
     void setUp() {
@@ -30,25 +32,15 @@ class RolServiceTest {
 
     @Test
     void getByNombreRol() {
-        when(rolRepositoy.findByNombreRol(any())).thenReturn(crearRolEntity());
+        when(rolRepositoy.findByNombreRol(any(NombreRol.class))).thenReturn(Optional.of(rol));
 
-        assertNotNull(rolService.getByNombreRol(any()));
-        assertEquals(crearRolEntity().get().getNombreRol(),
-                rolService.getByNombreRol(any()).get().getNombreRol());
-    }
-
-
-    private Optional<RolEntity> crearRolEntity () {
-        return Optional.of(RolEntity.builder().idRol(1).nombreRol(NombreRol.USUARIO).build());
+        assertNotNull(rolService.getByNombreRol(NombreRol.ANFITRION));
     }
 
     @Test
     void crearRol() {
-        when(rolRepositoy.save(any())).thenReturn(crearRolEntity().get());
+        when(rolRepositoy.save(any(RolEntity.class))).thenReturn(rol);
 
-        assertNotNull(rolService.crearRol(any()));
-
-        assertEquals(crearRolEntity().get().getNombreRol(),
-                rolService.crearRol(any()).getNombreRol());
+        assertNotNull(rolService.crearRol(rol));
     }
 }

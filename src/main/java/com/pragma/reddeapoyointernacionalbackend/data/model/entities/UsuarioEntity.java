@@ -12,6 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Builder
+@Table(name = "usuario")
 public class UsuarioEntity {
 
     @Id
@@ -24,8 +25,11 @@ public class UsuarioEntity {
 
     private String password;
 
-    @Column(name = "nombre_completo")
-    private String nombreCompleto;
+    @Column(name = "nombres")
+    private String nombres;
+
+    @Column(name = "apellidos")
+    private String apellidos;
 
     private String ciudad;
 
@@ -52,8 +56,16 @@ public class UsuarioEntity {
         this.password = password;
     }
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
     }
 
     public String getCiudad() {

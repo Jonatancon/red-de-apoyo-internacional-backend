@@ -10,6 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Builder
+@Table(name = "calificacion_casa")
 public class CalificacionCasaEntity {
 
     @Id
@@ -17,7 +18,6 @@ public class CalificacionCasaEntity {
     @Column(name = "id_calificacion_casa")
     private Integer idCalificacionCasa;
 
-    @Column(length = 500)
     private String comentario;
 
     @Column(name = "calificacion_casa")
@@ -29,6 +29,15 @@ public class CalificacionCasaEntity {
     @JoinColumn(name = "fk_casa_afiliada")
     @ManyToOne
     private CasaEntity casa;
+
+    @JoinColumn(name = "fk_usuario_calificador")
+    @ManyToOne
+    private UsuarioEntity usuarioCalificador;
+
+
+    public UsuarioEntity getUsuarioCalificador() {
+        return usuarioCalificador;
+    }
 
     public Integer getIdCalificacionCasa() {
         return idCalificacionCasa;

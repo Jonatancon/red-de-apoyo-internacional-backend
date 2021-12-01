@@ -11,7 +11,6 @@ import org.mockito.MockitoAnnotations;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -35,12 +34,13 @@ class UsuarioPrincipalTest {
         usuarioPrincipal = UsuarioPrincipal.build(usuarioEntity);
 
         assertEquals(usuarioEntity.getNombreUsuario(), usuarioPrincipal.getNombreUsuario());
-        assertEquals(usuarioEntity.getNombreCompleto(), usuarioPrincipal.getNombreCompleto());
+        assertEquals(usuarioEntity.getNombres(), usuarioPrincipal.getNombres());
+        assertEquals(usuarioEntity.getApellidos(), usuarioPrincipal.getApellidos());
         assertEquals(usuarioEntity.getCiudad(), usuarioPrincipal.getCiudad());
         assertEquals(usuarioEntity.getPais(), usuarioPrincipal.getPais());
         assertEquals(usuarioEntity.getPassword(), usuarioPrincipal.getPassword());
-        assertEquals(usuarioEntity.getRolEntity().stream().count(),
-                usuarioPrincipal.getAuthorities().stream().count());
+        assertEquals(usuarioEntity.getRolEntity().size(),
+                (long) usuarioPrincipal.getAuthorities().size());
 
         assertEquals(usuarioEntity.getNombreUsuario(), usuarioPrincipal.getUsername());
         assertTrue(usuarioPrincipal.isAccountNonExpired());
@@ -56,7 +56,7 @@ class UsuarioPrincipalTest {
         roles.add(new RolEntity(2, NombreRol.USUARIO));
 
         return Optional.of( UsuarioEntity.builder().idUsuario(1).nombreUsuario("jrstark")
-                .password("123").nombreCompleto("Jonatan Restrepo").pais("colombia")
+                .password("123").nombres("Jonatan Stiven").apellidos("Restrepo Lora").pais("colombia")
                 .ciudad("Medellin").rolEntity(roles).build() );
     }
 }

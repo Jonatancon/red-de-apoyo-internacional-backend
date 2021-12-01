@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -14,9 +15,6 @@ public class BusquedaCasasService {
 
     @Autowired
     private CasaRepository casaRepository;
-
-    @Autowired
-    private DisponibilidadService disponible;
 
     public List<CasaEntity> obtenerPorPais (String pais){
         return casaRepository.findAllByPais(pais);
@@ -34,12 +32,8 @@ public class BusquedaCasasService {
         return casaRepository.findAll();
     }
 
-    public List<CasaEntity> obtenerPorFecha (String fechaReserva) {
-        List<CasaEntity> casasFiltradas = casaRepository.findAll();
-
-        disponible.obtenerCasaOcupadasPorFecha(fechaReserva)
-                .forEach(casaEntity ->
-                        casasFiltradas.removeIf(casa -> casa.getIdCasa().equals(casaEntity.getIdCasa())));
-        return casasFiltradas;
+    public Optional<CasaEntity> buscarCasa (Integer id) {
+        return casaRepository.findById(id);
     }
+
 }

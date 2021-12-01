@@ -10,47 +10,64 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 class BusquedaCasasServiceTest {
 
-    @Mock
-    CasaRepository casaRepository;
-
     @InjectMocks
-    BusquedaCasasService busquedaCasasService;
+    private BusquedaCasasService busquedaCasasService;
 
     @Mock
-    DisponibilidadService disponibilidadService;
+    private CasaRepository casaRepository;
+
+    private CasaEntity casa = crearCasa().get(0);
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        when(casaRepository.findAllByCiudad(anyString())).thenReturn(listaCasa());
-        when(casaRepository.findAllByPais(anyString())).thenReturn(listaCasa());
-        when(casaRepository.findAllByEstado(anyString())).thenReturn(listaCasa());
-        when(casaRepository.findAll()).thenReturn(listaCasa());
-        when(disponibilidadService.obtenerCasaOcupadasPorFecha(anyString())).thenReturn(listaCasa());
+    }
+
+    @Test
+    void obtenerPorPais() {
+        when(casaRepository.findAllByPais(anyString())).thenReturn(crearCasa());
+        assertNotNull(busquedaCasasService.obtenerPorPais("Colombia"));
+    }
+
+    @Test
+    void obtenerPorCiudad() {
+        when(casaRepository.findAllByCiudad(anyString())).thenReturn(crearCasa());
+        assertNotNull(busquedaCasasService.obtenerPorCiudad("Medellin"));
+    }
+
+    @Test
+    void obtenerPorEstado() {
+        when(casaRepository.findAllByEstado(anyString())).thenReturn(crearCasa());
+        assertNotNull(busquedaCasasService.obtenerPorEstado("Antioquia"));
     }
 
     @Test
     void obtenerTodasLasCasas() {
-        assertNotNull(busquedaCasasService.obtenerPorCiudad(anyString()));
-        assertNotNull(busquedaCasasService.obtenerPorPais(anyString()));
-        assertNotNull(busquedaCasasService.obtenerPorEstado(anyString()));
+        when(casaRepository.findAll()).thenReturn(crearCasa());
         assertNotNull(busquedaCasasService.obtenerTodasLasCasas());
-
-        assertTrue(busquedaCasasService.obtenerPorFecha("12/11/2021").isEmpty());
-
     }
 
-    private List<CasaEntity> listaCasa () {
-        List<CasaEntity> addList = new ArrayList<>();
-        addList.add(CasaEntity.builder().idCasa(1).build());
-        addList.add(CasaEntity.builder().idCasa(2).build());
-        return addList;
+    @Test
+    void buscarCasa() {
+        when(casaRepository.findById(anyInt())).thenReturn(Optional.of(casa));
+        assertNotNull(busquedaCasasService.buscarCasa(1));
+    }
+
+    private List<CasaEntity> crearCasa() {
+        List<CasaEntity> listaCasas = new ArrayList<>();
+
+        listaCasas.add(CasaEntity.builder().idCasa(1).usuarioEntity(null).ciudad("Medellin")
+                .direccion("AAA").estado("AAA").pais("Colombia").build());
+
+        return listaCasas;
     }
 }

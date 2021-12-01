@@ -10,6 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Builder
+@Table(name = "calificacion_usuario")
 public class CalificacionUsuarioEntity {
 
     @Id
@@ -17,7 +18,6 @@ public class CalificacionUsuarioEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCalificacionUsuario;
 
-    @Column(length = 500)
     private String comentario;
 
     private Integer calificacion;
@@ -25,6 +25,10 @@ public class CalificacionUsuarioEntity {
     @JoinColumn(name = "fk_usuario")
     @ManyToOne
     private UsuarioEntity usuarioEntity;
+
+    @JoinColumn(name = "fk_anfitrion_calificador")
+    @ManyToOne
+    private UsuarioEntity anfitrion_calificador;
 
     public Integer getIdCalificacionUsuario() {
         return idCalificacionUsuario;

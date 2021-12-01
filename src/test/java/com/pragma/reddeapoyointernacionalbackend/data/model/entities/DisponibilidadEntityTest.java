@@ -2,6 +2,9 @@ package com.pragma.reddeapoyointernacionalbackend.data.model.entities;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DisponibilidadEntityTest {
@@ -13,16 +16,15 @@ class DisponibilidadEntityTest {
         crearDisponibilidad();
 
         assertEquals(1, disponible.getIdDisponibilidad());
-        assertEquals("12/11/2021", disponible.getFechaLlegada());
-        assertEquals("20/11/2021", disponible.getFechaSalida());
-        assertNull(disponible.getCasaEntity());
-        assertNull(disponible.getUsuarioEntity());
+        assertEquals("12/11/2021", disponible.getFechaLlegada().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        assertEquals("20/11/2021", disponible.getFechaSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        assertNull(disponible.getUsuarioReservado());
     }
 
     private void crearDisponibilidad () {
-        disponible = DisponibilidadEntity.builder().usuarioEntity(null)
-                .idDisponibilidad(1).casaEntity(null).fechaLlegada("12/11/2021")
-                .fechaSalida("20/11/2021").build();
+        disponible = DisponibilidadEntity.builder().usuarioReservado(null)
+                .idDisponibilidad(1).fechaLlegada(LocalDate.of(2021, 11, 12))
+                .fechaSalida(LocalDate.of(2021, 11, 20)).build();
     }
 
 }

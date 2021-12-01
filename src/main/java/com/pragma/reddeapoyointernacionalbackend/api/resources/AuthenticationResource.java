@@ -5,7 +5,9 @@ import com.pragma.reddeapoyointernacionalbackend.api.dtos.LoginUsuarioDto;
 import com.pragma.reddeapoyointernacionalbackend.api.dtos.MessageDto;
 import com.pragma.reddeapoyointernacionalbackend.api.dtos.UsuarioDto;
 import com.pragma.reddeapoyointernacionalbackend.api.resources.util.AutenticacionUtil;
+import com.pragma.reddeapoyointernacionalbackend.data.model.entities.UsuarioEntity;
 import com.pragma.reddeapoyointernacionalbackend.domain.services.UsuarioService;
+import com.pragma.reddeapoyointernacionalbackend.http_errors.RequestErrors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,35 +36,36 @@ public class AuthenticationResource {
     @PostMapping(NEW_USER)
     public ResponseEntity<MessageDto> newUser(@Valid @RequestBody
                                              UsuarioDto usuarioDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return new ResponseEntity<>(new MessageDto("Campos mal puestos"), HttpStatus.BAD_REQUEST);
 
-        if (Boolean.TRUE.equals(usuarioService.existeNombeUsuario(usuarioDto.getNombreUsuario()))) // cambio si no cambiar a tipo de dato normal
-            return new ResponseEntity<>(new MessageDto("Ya se encuentra en uso"), HttpStatus.BAD_REQUEST);
+        if  (bindingResult.hasErrors())
+            throw new RequestErrors("Missing data", "R-001", HttpStatus.BAD_REQUEST);
+        if (Boolean.TRUE.equals(usuarioService.existeNombeUsuario(usuarioDto.getNombreUsuario())))
+            throw new RequestErrors("This Name User Already Exists", "R-002", HttpStatus.IM_USED);
 
-        try{
-            usuarioService.crearUsuario(autenticacionUtil.crearUsuario(usuarioDto));
-            return new ResponseEntity<>(new MessageDto("Usuario Guardado"),HttpStatus.CREATED);
-        }catch (Exception e){
-            return new ResponseEntity<>(new MessageDto("Oooops... " + e), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        UsuarioEntity user = autenticacionUtil.crearUsuario(usuarioDto);
+        usuarioService.crearUsuario(user);
+
+        MessageDto message = MessageDto.builder().code("S-001").message("Data Save").build();
+
+        return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
     @PostMapping(LOGIN)
     public ResponseEntity<JwtDto> loginUsuario (@Valid @RequestBody
                                                  LoginUsuarioDto loginUsuarioDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return new ResponseEntity<>(new JwtDto("Campos Mal Puestos"), HttpStatus.BAD_REQUEST);
+            throw new RequestErrors("Missing data", "R-001", HttpStatus.BAD_REQUEST);
 
-        return new ResponseEntity<>(autenticacionUtil.autenticarUsuario(loginUsuarioDto),HttpStatus.OK);
+        JwtDto token = autenticacionUtil.autenticarUsuario(loginUsuarioDto);
+
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
     @PostMapping(REFRESH_TOKEN)
-    public ResponseEntity<JwtDto> refreshToken (@Valid @RequestBody
-                                                            JwtDto jwtDto, BindingResult bindingResult) throws ParseException {
-        if (bindingResult.hasErrors())
-            return new ResponseEntity<>(new JwtDto("Sin Token"), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<JwtDto> refreshToken (@RequestBody JwtDto jwtDto) throws ParseException {
 
-        return new ResponseEntity<>(autenticacionUtil.refreshToken(jwtDto), HttpStatus.OK);
+        JwtDto token = autenticacionUtil.refreshToken(jwtDto);
+
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 }
