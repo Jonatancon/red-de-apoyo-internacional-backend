@@ -2,9 +2,7 @@ name: Integration continue - Tests
 on:
   push:
     branches: ['develop', 'release-*']
-
   workflow_dispatch:
-
 jobs:
   test:
     name: Test - Unit & Integration & SonarCloud Scan
@@ -23,30 +21,21 @@ jobs:
         uses: bluenovaio/action-slack@1.1.5
         if: ${{ job.status == 'success' }}
         with:
-          {
-            "blocks": [
-              {
-                "type": "header",
-                "text": {
-                  "type": "plain_text",
-                  "text": "Details of "  ${{ github.action }}  "... for "  ${{ github.actor }},
-                  "emoji": true
-                }
-              },
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "The code status is " ${{ job.status }}  "congratulation take a cookie :cookie: for the coffee :smile:"
-                },
-                "accessory": {
-                  "type": "image",
-                  "image_url": "https://cdn.pixabay.com/photo/2016/09/16/19/14/coffee-1674884_960_720.png",
-                  "alt_text": "cute cat"
-                }
-              }
-            ]
-          }
+          blocks:
+            - type: header
+              text:
+                type: plain_text
+                text: Details of  ${{ github.action }}  ... for  ${{github.actor }}
+                emoji: true
+            - type: section
+              text:
+                type: mrkdwn
+                text: 'The code status is  ${{ job.status }}  congratulation take a cookie :cookie:
+                for the coffee :smile:'
+              accessory:
+                type: image
+                image_url: https://cdn.pixabay.com/photo/2016/09/16/19/14/coffee-1674884_960_720.png
+                alt_text: cute cat
           webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Sonar
         if: success()
