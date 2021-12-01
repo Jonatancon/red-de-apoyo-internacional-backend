@@ -17,7 +17,8 @@
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=com.pragma%3Ared-de-apoyo-internacional-backend&metric=security_rating)](https://sonarcloud.io/dashboard?id=com.pragma%3Ared-de-apoyo-internacional-backend)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=com.pragma%3Ared-de-apoyo-internacional-backend&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=com.pragma%3Ared-de-apoyo-internacional-backend)
 [![Build Status](https://app.travis-ci.com/Jonatancon/red-de-apoyo-internacional-backend.svg?branch=develop)](https://app.travis-ci.com/Jonatancon/red-de-apoyo-internacional-backend)
+[![Spring User - Tests](https://github.com/Jonatancon/red-de-apoyo-internacional-backend/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/Jonatancon/red-de-apoyo-internacional-backend/actions/workflows/ci-cd.yml)
 
 ### Tecnologías utilizadas
 
-`Java` `Maven` `GitHub` `SonarCloud` `Travis` `SpringBoot`
+`Java` `Maven` `GitHub` `SonarCloud` `Travis` `SpringBoot` `slack`
