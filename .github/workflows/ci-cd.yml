@@ -17,29 +17,9 @@ jobs:
         run: mvn -B verify
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      #- name: Slack Webhook
-       # uses: bluenovaio/action-slack@1.1.5
-        #if: ${{ job.status == 'success' }}
-        #with:
-         # blocks:
-            #- type: header
-             # text:
-               # type: plain_text
-              #  text: Details of  ${{ github.action }}  ... for  ${{github.actor }}
-             #   emoji: true
-            #- type: section
-              #text:
-                #type: mrkdwn
-                #text: 'The code status is  ${{ job.status }}  congratulation take a cookie :cookie:
-               # for the coffee :smile:'
-              #accessory:
-             #   type: image
-            #    image_url: https://cdn.pixabay.com/photo/2016/09/16/19/14/coffee-1674884_960_720.png
-           #     alt_text: cute cat
-          #webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-
       - name: slack-webhook-payload
         uses: alonsohki/slack-webhook-payload@v1
+        if: ${{ job.status == 'success' }}
         with:
           # Slack webhook URL
           slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }} # default is
@@ -51,7 +31,7 @@ jobs:
                   "type": "header",
                   "text": {
                     "type": "plain_text",
-                    "text": "Details of  ${{ github.action }}  ... for  ${{github.actor }}",
+                    "text": "Details of  ${{ github.event_name }}  ... for  ${{github.actor }}",
                     "emoji": true
                   }
                 },
@@ -69,6 +49,34 @@ jobs:
                 }
               ]
             }' # default is { "text": "Content not set" }
+      - if: ${{ job.status != 'success' }}
+        with:
+          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          content:
+            '{
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Details of  ${{ github.event_name }}  ... for  ${{github.actor }}",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "The code status is  ${{ job.status }}  please checkout and repair"
+                  },
+                  "accessory": {
+                    "type": "image",
+                    "image_url": "https://cdn.pixabay.com/photo/2019/03/07/23/55/ncorrect-answer-4041502_960_720.png",
+                    "alt_text": "cute cat"
+                  }
+                }
+              ]
+            }'
       - name: Sonar
         if: success()
         run: >
