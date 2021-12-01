@@ -8,16 +8,19 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CrearRoles implements CommandLineRunner {
+public class CrearRoles  implements CommandLineRunner {
 
     @Autowired
     RolService rolService;
 
     @Override
-    public void run(String... args) throws Exception {
-        RolEntity rolAnfitrion = new RolEntity(null,NombreRol.ANFITRION);
-        RolEntity rolUsuario = new RolEntity(null,NombreRol.USUARIO);
-        rolService.crearRol(rolAnfitrion);
-        rolService.crearRol(rolUsuario);
+    public void run(String... args) {
+
+        if (rolService.getByNombreRol(NombreRol.ANFITRION).isEmpty()) {
+            RolEntity rolAnfitrion = new RolEntity(null,NombreRol.ANFITRION);
+            RolEntity rolUsuario = new RolEntity(null,NombreRol.USUARIO);
+            rolService.crearRol(rolAnfitrion);
+            rolService.crearRol(rolUsuario);
+        }
     }
 }

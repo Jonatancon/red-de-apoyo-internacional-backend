@@ -15,7 +15,8 @@ public class UsuarioPrincipal implements UserDetails {
 
     private String nombreUsuario;
     private String password;
-    private String nombreCompleto;
+    private String nombres;
+    private String apellidos;
     private String ciudad;
     private String pais;
     private Collection<? extends GrantedAuthority> authorities;
@@ -25,7 +26,8 @@ public class UsuarioPrincipal implements UserDetails {
                 .map(rolEntity -> new SimpleGrantedAuthority(rolEntity.getNombreRol().name()))
                         .collect(Collectors.toList());
         return new UsuarioPrincipal(usuarioEntity.getNombreUsuario(), usuarioEntity.getPassword(),
-                usuarioEntity.getNombreCompleto(), usuarioEntity.getCiudad(), usuarioEntity.getPais(), authorities);
+                usuarioEntity.getNombres(), usuarioEntity.getApellidos(),
+                usuarioEntity.getCiudad(), usuarioEntity.getPais(), authorities);
     }
 
     @Override
@@ -67,9 +69,11 @@ public class UsuarioPrincipal implements UserDetails {
         return nombreUsuario;
     }
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
+    public String getNombres() {
+        return nombres;
     }
+
+    public String getApellidos(){return apellidos;}
 
     public String getCiudad() {
         return ciudad;

@@ -1,8 +1,6 @@
 package com.pragma.reddeapoyointernacionalbackend.domain.services;
 
-import com.pragma.reddeapoyointernacionalbackend.data.model.entities.RolEntity;
 import com.pragma.reddeapoyointernacionalbackend.data.model.entities.UsuarioEntity;
-import com.pragma.reddeapoyointernacionalbackend.data.model.enums.NombreRol;
 import com.pragma.reddeapoyointernacionalbackend.data.repository.UsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,21 +8,22 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 class UsuarioServiceTest {
 
     @Mock
-    UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
 
     @InjectMocks
-    UsuarioService usuarioService;
+    private UsuarioService usuarioService;
+
+    private UsuarioEntity usuarioEntity = UsuarioEntity.builder().nombreUsuario("JRSTARK").build();
 
     @BeforeEach
     void setUp() {
@@ -32,33 +31,23 @@ class UsuarioServiceTest {
     }
 
     @Test
-    void encontrarPorNombreUsuario () {
-        when(usuarioRepository.findByNombreUsuario(any())).thenReturn(crearUsuarioMock());
-
-        assertNotNull(usuarioService.getUsuarioFromNombreUsuario(any()));
-    }
-
-    @Test
     void crearUsuario() {
-        when(usuarioRepository.save(any())).thenReturn(crearUsuarioMock().get());
+        when(usuarioRepository.save(any(UsuarioEntity.class))).thenReturn(usuarioEntity);
 
-        assertEquals("123", usuarioService.crearUsuario(any()).getPassword());
+        assertNotNull(usuarioService.crearUsuario(usuarioEntity));
     }
 
     @Test
     void existeNombeUsuario() {
-        when(usuarioRepository.existsByNombreUsuario(any())).thenReturn(true);
+        when(usuarioRepository.existsByNombreUsuario(anyString())).thenReturn(true);
 
-        assertEquals(true, usuarioService.existeNombeUsuario(any()));
+        assertTrue(usuarioService.existeNombeUsuario("JRSTARK"));
     }
 
-    private Optional<UsuarioEntity> crearUsuarioMock () {
-        Set<RolEntity> roles = new HashSet<>();
-        roles.add(new RolEntity(1, NombreRol.ANFITRION));
-        roles.add(new RolEntity(2, NombreRol.USUARIO));
+    @Test
+    void getUsuarioFromNombreUsuario() {
+        when(usuarioRepository.findByNombreUsuario(anyString())).thenReturn(Optional.of(usuarioEntity));
 
-        return Optional.of( UsuarioEntity.builder().idUsuario(1).nombreUsuario("jrstark")
-                .password("123").nombreCompleto("Jonatan Restrepo").pais("colombia")
-                .ciudad("Medellin").rolEntity(roles).build() );
+        assertNotNull(usuarioService.getUsuarioFromNombreUsuario("JRSTARK"));
     }
 }

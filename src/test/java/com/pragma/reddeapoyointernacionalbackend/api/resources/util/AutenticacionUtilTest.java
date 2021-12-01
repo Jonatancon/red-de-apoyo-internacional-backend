@@ -87,13 +87,9 @@ class AutenticacionUtilTest {
 
         Set<String> roles = new HashSet<>();
         roles.add("usuario");
-        UsuarioDto usuarioMockDto = new UsuarioDto();
-        usuarioMockDto.setNombreUsuario("jrstark");
-        usuarioMockDto.setNombreCompleto("Jonatan Restrepo");
-        usuarioMockDto.setPais("Colombia");
-        usuarioMockDto.setCiudad("Medellin");
-        usuarioMockDto.setPassword("123");
-        usuarioMockDto.setRoles(roles);
+        UsuarioDto usuarioMockDto = UsuarioDto.builder().nombreUsuario("jrstark").nombres("Jonatan")
+                .apellidos("Restrepo").ciudad("Medellin").pais("Colombia")
+                .password("123").roles(roles).build();
 
         UsuarioEntity usuarioMock = autenticacionUtil.crearUsuario(usuarioMockDto);
 
@@ -104,13 +100,9 @@ class AutenticacionUtilTest {
     private UsuarioDto crearUsuarioDto() {
         Set<String> roles = new HashSet<>();
         roles.add("anfitrion");
-        usuarioDto = new UsuarioDto();
-        usuarioDto.setNombreUsuario("jrstark");
-        usuarioDto.setNombreCompleto("Jonatan Restrepo");
-        usuarioDto.setPais("Colombia");
-        usuarioDto.setCiudad("Medellin");
-        usuarioDto.setPassword("123");
-        usuarioDto.setRoles(roles);
+        usuarioDto = UsuarioDto.builder().nombreUsuario("jrstark").nombres("Jonatan")
+                .apellidos("Restrepo").ciudad("Medellin").pais("Colombia")
+                .password("123").roles(roles).build();
 
         return usuarioDto;
     }

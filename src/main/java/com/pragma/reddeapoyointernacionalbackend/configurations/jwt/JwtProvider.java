@@ -6,8 +6,7 @@ import com.nimbusds.jwt.JWTParser;
 import com.pragma.reddeapoyointernacionalbackend.api.dtos.JwtDto;
 import com.pragma.reddeapoyointernacionalbackend.data.model.UsuarioPrincipal;
 import io.jsonwebtoken.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,15 +18,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@Slf4j
 public class JwtProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
+    private final String secret;
 
-    @Value("${jwt.secret}")
-    private String secret;
+    private final Long expiration;
 
-    @Value("${jwt.expiration}")
-    private Long expiration;
+    public JwtProvider(@Value("${jwt.secret}") String secret, @Value("${jwt.expiration}") Long expiration) {
+        this.secret = secret;
+        this.expiration = expiration;
+    }
+
 
     private static final String ROLES = "roles";
 
@@ -54,15 +56,11 @@ public class JwtProvider {
             Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token);
             return true;
         }catch (MalformedJwtException e) {
-            logger.error("Token mal formado");
-        }catch (UnsupportedJwtException e) {
-            logger.error("Token no Soportado");
+            log.error("Token mal formado");
         }catch (ExpiredJwtException e) {
-            logger.error("Token Expirado");
+            log.error("Token Expirado");
         }catch (IllegalArgumentException e) {
-            logger.error("Token Ilegal");
-        }catch (SignatureException e) {
-            logger.error("Fail en la firma");
+            log.error("Token Ilegal");
         }
         return false;
     }
@@ -84,6 +82,6 @@ public class JwtProvider {
                     .signWith(SignatureAlgorithm.HS512, secret.getBytes())
                     .compact();
         }
-        return null;
+        return "Opsss.... algo salio mal comprueba tu token";
     }
 }

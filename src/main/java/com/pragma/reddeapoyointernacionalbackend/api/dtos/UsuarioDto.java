@@ -24,7 +24,11 @@ public class UsuarioDto {
 
     @NotBlank
     @NotNull
-    private String nombreCompleto;
+    private String nombres;
+
+    @NotBlank
+    @NotNull
+    private String apellidos;
 
     @NotBlank
     @NotNull
@@ -44,9 +48,11 @@ public class UsuarioDto {
         return password;
     }
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
+    public String getNombres() {
+        return nombres;
     }
+
+    public String getApellidos() {return apellidos;}
 
     public String getCiudad() {
         return ciudad;
@@ -66,21 +72,5 @@ public class UsuarioDto {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
-    public void setRoles(Set<String> roles) {
-        this.roles = roles;
     }
 }

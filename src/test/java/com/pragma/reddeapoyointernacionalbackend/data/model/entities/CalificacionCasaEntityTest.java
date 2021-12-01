@@ -19,11 +19,10 @@ class CalificacionCasaEntityTest {
         assertNull(calificacionCasa.getCasa());
     }
 
-    private CalificacionCasaEntity crearCalificacion() {
+    private void crearCalificacion() {
         calificacionCasa = CalificacionCasaEntity.builder()
                 .idCalificacionCasa(1).calificacionAnfitrion(5).calificacionCasa(4)
                 .comentario("OK").casa(null).build();
-        return calificacionCasa;
     }
 
 }

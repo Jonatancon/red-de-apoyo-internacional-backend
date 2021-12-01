@@ -10,6 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Builder
+@Table(name = "casa")
 public class CasaEntity {
 
     @Id
@@ -27,15 +28,22 @@ public class CasaEntity {
 
     private String telefono;
 
-    @Lob
-    private byte[] foto;
+    private String urlFoto;
 
     @JoinColumn(name = "fk_propietario")
     @ManyToOne
     private UsuarioEntity usuarioEntity;
 
+    @JoinColumn(name = "fk_disponibilidad")
+    @ManyToOne
+    private DisponibilidadEntity disponibilidadEntity;
+
     public Integer getIdCasa() {
         return idCasa;
+    }
+
+    public DisponibilidadEntity getDisponibilidadEntity() {
+        return disponibilidadEntity;
     }
 
     public String getDireccion() {
@@ -54,9 +62,7 @@ public class CasaEntity {
         return telefono;
     }
 
-    public byte[] getFoto() {
-        return foto;
-    }
+    public String getUrlFoto(){return urlFoto;}
 
     public String getEstado() {
         return estado;

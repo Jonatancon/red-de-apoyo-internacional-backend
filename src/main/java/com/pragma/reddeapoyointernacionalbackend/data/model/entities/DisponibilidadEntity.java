@@ -6,11 +6,13 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Builder
+@Table(name = "disponibilidad")
 public class DisponibilidadEntity {
 
     @Id
@@ -19,42 +21,34 @@ public class DisponibilidadEntity {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_llegada")
-    private String fechaLlegada;
+    private LocalDate fechaLlegada;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_salida")
-    private String fechaSalida;
-
-    @JoinColumn(name = "fk_casa")
-    @ManyToOne
-    private CasaEntity casaEntity;
+    private LocalDate fechaSalida;
 
     @JoinColumn(name = "fk_usuario_reservado")
     @ManyToOne
-    private UsuarioEntity usuarioEntity;
+    private UsuarioEntity usuarioReservado;
 
     private boolean calificoUsuario;
 
     private boolean calificoAnfritrion;
 
-    public UsuarioEntity getUsuarioEntity() {
-        return usuarioEntity;
+    public UsuarioEntity getUsuarioReservado() {
+        return usuarioReservado;
     }
 
     public Integer getIdDisponibilidad() {
         return idDisponibilidad;
     }
 
-    public String getFechaLlegada() {
+    public LocalDate getFechaLlegada() {
         return fechaLlegada;
     }
 
-    public String getFechaSalida() {
+    public LocalDate getFechaSalida() {
         return fechaSalida;
-    }
-
-    public CasaEntity getCasaEntity() {
-        return casaEntity;
     }
 
     public boolean isCalificoUsuario() {

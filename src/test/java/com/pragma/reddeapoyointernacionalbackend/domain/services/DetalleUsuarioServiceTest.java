@@ -43,7 +43,7 @@ class DetalleUsuarioServiceTest {
         roles.add(new RolEntity(2, NombreRol.USUARIO));
 
         return Optional.of(UsuarioEntity.builder().idUsuario(1).nombreUsuario("jrstark")
-                .nombreCompleto("Jonatan Restrepo").pais("colombia").ciudad("medellin")
+                .nombres("Jonatan Stiven").apellidos("Restrepo Lora").pais("colombia").ciudad("medellin")
                 .password("1234").rolEntity(roles).build());
     }
 }
