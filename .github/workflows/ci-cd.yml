@@ -24,7 +24,6 @@ jobs:
         if: ${{ job.status == 'success' }}
         with:
           blocks:
-           '[
               {
                 "type": "header",
                 "text": {
@@ -45,8 +44,6 @@ jobs:
                   "alt_text": "cute cat"
                 }
               }
-            ]'
-
           webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Sonar
         if: success()
