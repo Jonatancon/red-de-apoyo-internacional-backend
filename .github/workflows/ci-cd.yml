@@ -21,8 +21,60 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
       - name: Slack Webhook
         uses: bluenovaio/action-slack@1.1.5
+        if: ${{ job.status == 'success' }}
         with:
-          text: ${{ job.status }}
+          {
+            "blocks": [
+              {
+                "type": "header",
+                "text": {
+                  "type": "plain_text",
+                  "text": "Details of " ${{ github.action }} " ... for " ${{github.actor}},
+                  "emoji": true
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "The code status is " ${{ job.status }} " congratulation take a cookie for the coffee :smile:"
+                },
+                "accessory": {
+                  "type": "image",
+                  "image_url": "https://cdn.pixabay.com/photo/2016/09/16/19/14/coffee-1674884_960_720.png",
+                  "alt_text": "success"
+                }
+              }
+            ]
+          }
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - if: ${{ job.status != 'success' }}
+        with:
+          {
+            "blocks": [
+              {
+                "type": "header",
+                "text": {
+                  "type": "plain_text",
+                  "text": "Details of " ${ { github.action } } " ... for " ${{github.actor } },
+                "emoji": true
+                }
+                },
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "The code status is " ${ { job.status } } " please checkout you code :smile:"
+                    },
+                    "accessory": {
+                      "type": "image",
+                      "image_url": "https://cdn.pixabay.com/photo/2019/03/07/23/55/ncorrect-answer-4041502_960_720.png",
+                      "alt_text": "code error"
+                    }
+                  }
+            ]
+          }
           webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Sonar
         if: success()
