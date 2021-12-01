@@ -28,6 +28,11 @@ jobs:
           #fields: repo,author,commit,author,workflow, # selectable (default: repo,message)
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+      - name: Slack Webhook
+        uses: bluenovaio/action-slack@1.1.5
+        with:
+          text: commit
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Sonar
         if: success()
         run: >
