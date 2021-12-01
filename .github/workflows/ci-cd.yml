@@ -37,7 +37,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "The code status is " ${{ job.status }} " congratulation take a cookie for the coffee :smile:"
+                  "text": "The code status is " ${{ job.status }} " congratulation take a cookie :cookie: for the coffee :smile:"
                 },
                 "accessory": {
                   "type": "image",
