@@ -23,12 +23,13 @@ jobs:
         uses: bluenovaio/action-slack@1.1.5
         if: ${{ job.status == 'success' }}
         with:
-          blocks:
+          {
+            "blocks": [
               {
                 "type": "header",
                 "text": {
                   "type": "plain_text",
-                  "text": "Details of  ${ { github.action } }  ... for  ${{github.actor } }",
+                  "text": "Details of "  ${{ github.action }}  "... for "  ${{ github.actor }},
                   "emoji": true
                 }
               },
@@ -36,7 +37,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "The code status is  ${{ job.status }}  congratulation take a cookie :cookie: for the coffee :smile:"
+                  "text": "The code status is " ${{ job.status }}  "congratulation take a cookie :cookie: for the coffee :smile:"
                 },
                 "accessory": {
                   "type": "image",
@@ -44,6 +45,8 @@ jobs:
                   "alt_text": "cute cat"
                 }
               }
+            ]
+          }
           webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Sonar
         if: success()
