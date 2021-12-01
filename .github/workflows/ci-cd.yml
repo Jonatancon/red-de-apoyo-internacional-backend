@@ -17,26 +17,58 @@ jobs:
         run: mvn -B verify
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      - name: Slack Webhook
-        uses: bluenovaio/action-slack@1.1.5
-        if: ${{ job.status == 'success' }}
+      #- name: Slack Webhook
+       # uses: bluenovaio/action-slack@1.1.5
+        #if: ${{ job.status == 'success' }}
+        #with:
+         # blocks:
+            #- type: header
+             # text:
+               # type: plain_text
+              #  text: Details of  ${{ github.action }}  ... for  ${{github.actor }}
+             #   emoji: true
+            #- type: section
+              #text:
+                #type: mrkdwn
+                #text: 'The code status is  ${{ job.status }}  congratulation take a cookie :cookie:
+               # for the coffee :smile:'
+              #accessory:
+             #   type: image
+            #    image_url: https://cdn.pixabay.com/photo/2016/09/16/19/14/coffee-1674884_960_720.png
+           #     alt_text: cute cat
+          #webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: slack-webhook-payload
+        uses: alonsohki/slack-webhook-payload@v1
         with:
-          blocks:
-            - type: header
-              text:
-                type: plain_text
-                text: Details of  ${{ github.action }}  ... for  ${{github.actor }}
-                emoji: true
-            - type: section
-              text:
-                type: mrkdwn
-                text: 'The code status is  ${{ job.status }}  congratulation take a cookie :cookie:
-                for the coffee :smile:'
-              accessory:
-                type: image
-                image_url: https://cdn.pixabay.com/photo/2016/09/16/19/14/coffee-1674884_960_720.png
-                alt_text: cute cat
-          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          # Slack webhook URL
+          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }} # default is
+          # Content to be sent to the incoming webhook, in JSON format
+          content:
+            '{
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Details of  ${{ github.action }}  ... for  ${{github.actor }}",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "The code status is  ${{ job.status }}  congratulation take a cookie :cookie: for the coffee :smile:"
+                  },
+                  "accessory": {
+                    "type": "image",
+                    "image_url": "https://cdn.pixabay.com/photo/2016/09/16/19/14/coffee-1674884_960_720.png",
+                    "alt_text": "cute cat"
+                  }
+                }
+              ]
+            }' # default is { "text": "Content not set" }
       - name: Sonar
         if: success()
         run: >
