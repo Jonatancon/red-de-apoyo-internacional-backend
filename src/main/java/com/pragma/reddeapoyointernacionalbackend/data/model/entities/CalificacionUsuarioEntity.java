@@ -28,7 +28,7 @@ public class CalificacionUsuarioEntity {
 
     @JoinColumn(name = "fk_anfitrion_calificador")
     @ManyToOne
-    private UsuarioEntity anfitrion_calificador;
+    private UsuarioEntity anfitrionCalificador;
 
     public Integer getIdCalificacionUsuario() {
         return idCalificacionUsuario;
