@@ -31,6 +31,10 @@ public class DisponibilidadEntity {
     @ManyToOne
     private UsuarioEntity usuarioReservado;
 
+    @JoinColumn(name = "fk_casa_reservada")
+    @ManyToOne
+    private CasaEntity casaReservada;
+
     private boolean calificoUsuario;
 
     private boolean calificoAnfritrion;
@@ -57,5 +61,9 @@ public class DisponibilidadEntity {
 
     public boolean isCalificoAnfritrion() {
         return calificoAnfritrion;
+    }
+
+    public CasaEntity getCasaReservada() {
+        return casaReservada;
     }
 }

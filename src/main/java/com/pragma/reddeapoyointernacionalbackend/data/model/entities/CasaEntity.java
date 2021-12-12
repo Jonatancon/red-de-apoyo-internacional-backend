@@ -34,16 +34,9 @@ public class CasaEntity {
     @ManyToOne
     private UsuarioEntity usuarioEntity;
 
-    @JoinColumn(name = "fk_disponibilidad")
-    @ManyToOne
-    private DisponibilidadEntity disponibilidadEntity;
 
     public Integer getIdCasa() {
         return idCasa;
-    }
-
-    public DisponibilidadEntity getDisponibilidadEntity() {
-        return disponibilidadEntity;
     }
 
     public String getDireccion() {

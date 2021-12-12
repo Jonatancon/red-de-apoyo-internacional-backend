@@ -1,5 +1,6 @@
 package com.pragma.reddeapoyointernacionalbackend.domain.services;
 
+import com.pragma.reddeapoyointernacionalbackend.api.dtos.CriterioDto;
 import com.pragma.reddeapoyointernacionalbackend.data.model.entities.CasaEntity;
 import com.pragma.reddeapoyointernacionalbackend.data.repository.CasaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,10 @@ public class BusquedaCasasService {
 
     public Optional<CasaEntity> buscarCasa (Integer id) {
         return casaRepository.findById(id);
+    }
+
+    public List<CasaEntity> obtenerPorCriterioDeBusqueda (CriterioDto criterioDto) {
+        return casaRepository.findAllByCriterial(criterioDto);
     }
 
 }
