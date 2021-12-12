@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CasaRepository extends JpaRepository<CasaEntity, Integer> {
+public interface CasaRepository extends JpaRepository<CasaEntity, Integer>, CasasRepositoryCustom {
 
     List<CasaEntity> findAllByPais (String pais);
     List<CasaEntity> findAllByCiudad (String ciudad);

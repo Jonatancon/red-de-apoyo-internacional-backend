@@ -19,6 +19,7 @@ public class UsuarioPrincipal implements UserDetails {
     private String apellidos;
     private String ciudad;
     private String pais;
+    private String estado;
     private Collection<? extends GrantedAuthority> authorities;
 
     public static UsuarioPrincipal build(UsuarioEntity usuarioEntity) {
@@ -27,7 +28,7 @@ public class UsuarioPrincipal implements UserDetails {
                         .collect(Collectors.toList());
         return new UsuarioPrincipal(usuarioEntity.getNombreUsuario(), usuarioEntity.getPassword(),
                 usuarioEntity.getNombres(), usuarioEntity.getApellidos(),
-                usuarioEntity.getCiudad(), usuarioEntity.getPais(), authorities);
+                usuarioEntity.getCiudad(), usuarioEntity.getPais(), usuarioEntity.getEstado(), authorities);
     }
 
     @Override
@@ -81,5 +82,9 @@ public class UsuarioPrincipal implements UserDetails {
 
     public String getPais() {
         return pais;
+    }
+
+    public String getEstado() {
+        return estado;
     }
 }

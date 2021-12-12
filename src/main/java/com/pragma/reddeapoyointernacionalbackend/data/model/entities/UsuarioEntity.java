@@ -35,6 +35,8 @@ public class UsuarioEntity {
 
     private String pais;
 
+    private String estado;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"),
     inverseJoinColumns = @JoinColumn(name = "rol_id"))
@@ -74,6 +76,10 @@ public class UsuarioEntity {
 
     public String getPais() {
         return pais;
+    }
+
+    public String getEstado() {
+        return estado;
     }
 
     public Set<RolEntity> getRolEntity() {

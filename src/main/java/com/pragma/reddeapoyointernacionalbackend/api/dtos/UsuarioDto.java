@@ -38,6 +38,10 @@ public class UsuarioDto {
     @NotNull
     private String pais;
 
+    @NotBlank
+    @NotNull
+    private String estado;
+
     private Set<String> roles = new HashSet<>();
 
     public String getNombreUsuario() {
@@ -64,6 +68,10 @@ public class UsuarioDto {
 
     public Set<String> getRoles() {
         return roles;
+    }
+
+    public String getEstado() {
+        return estado;
     }
 
     public void setNombreUsuario(String nombreUsuario) {

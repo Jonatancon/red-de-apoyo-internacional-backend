@@ -45,7 +45,8 @@ public class AutenticacionUtil {
         return UsuarioEntity.builder().idUsuario(null).nombreUsuario(usuarioDto.getNombreUsuario())
                 .password(passwordEncoder.encode(usuarioDto.getPassword()))
                 .nombres(usuarioDto.getNombres()).apellidos(usuarioDto.getApellidos())
-                .ciudad(usuarioDto.getCiudad()).pais(usuarioDto.getPais()).rolEntity(roles).build();
+                .ciudad(usuarioDto.getCiudad()).pais(usuarioDto.getPais())
+                .estado(usuarioDto.getEstado()).rolEntity(roles).build();
     }
 
     public JwtDto autenticarUsuario (LoginUsuarioDto loginUsuarioDto) {
