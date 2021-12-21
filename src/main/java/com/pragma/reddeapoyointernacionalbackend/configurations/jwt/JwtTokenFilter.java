@@ -23,7 +23,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Autowired
     private DetalleUsuarioService detalleUsuarioService;
 
-    private static final String BEARER = "Bearer";
+    private static final String BEARER = "Bearer ";
     private static final String AUTHORIZATION = "Authorization";
 
     @Override

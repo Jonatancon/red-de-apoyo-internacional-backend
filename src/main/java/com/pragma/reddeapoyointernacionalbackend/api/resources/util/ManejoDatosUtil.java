@@ -6,7 +6,9 @@ import com.pragma.reddeapoyointernacionalbackend.data.model.entities.CasaEntity;
 import com.pragma.reddeapoyointernacionalbackend.data.model.entities.UsuarioEntity;
 import com.pragma.reddeapoyointernacionalbackend.domain.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ManejoDatosUtil {
 
     @Autowired

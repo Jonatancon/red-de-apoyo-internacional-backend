@@ -18,7 +18,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(CasaResource.CASAS)
 @CrossOrigin
-@PreAuthorize("hasRole('ANFITRION')")
+@PreAuthorize("hasAuthority('ANFITRION')")
 public class CasaResource {
 
     public static final String CASAS = "/api/casas";
@@ -27,16 +27,18 @@ public class CasaResource {
     @Autowired
     private CasaService casaService;
 
-    private final ManejoDatosUtil manejoDatosUtil = new ManejoDatosUtil();
+    @Autowired
+    private ManejoDatosUtil manejoDatosUtil;
 
     @PostMapping(SAVE)
-    @PreAuthorize("hasRole('ANFITRION')")
+    @PreAuthorize("hasAuthority('ANFITRION')")
     public ResponseEntity<MessageDto> guardarCasa (@Valid @RequestBody CasaDto casaDto, BindingResult bindingResult,
                                                    @RequestHeader("Authorization") String token) {
 
         if (bindingResult.hasErrors())
             throw new RequestErrors("Missing data", "R-001", HttpStatus.BAD_REQUEST);
 
+        token = token.split(" ")[1];
         CasaEntity casa = manejoDatosUtil.crearCasa(casaDto, token);
 
         casaService.crearUnaCasa(casa);
