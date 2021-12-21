@@ -1,8 +1,6 @@
 package com.pragma.reddeapoyointernacionalbackend.configurations.jwt;
 
-import com.pragma.reddeapoyointernacionalbackend.http_errors.RequestErrors;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
