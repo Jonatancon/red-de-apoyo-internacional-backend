@@ -7,7 +7,9 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -30,7 +32,12 @@ public class ControllerAdvice {
         return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(value = {InternalAuthenticationServiceException.class, BadCredentialsException.class})
+    @ExceptionHandler(value = {
+            InternalAuthenticationServiceException.class,
+            BadCredentialsException.class,
+            InsufficientAuthenticationException.class,
+            AccessDeniedException.class
+    })
     public ResponseEntity<MessageDto> aunthenticationError() {
         MessageDto message = MessageDto.builder().code("A-001").message("Unauthorized").build();
 
