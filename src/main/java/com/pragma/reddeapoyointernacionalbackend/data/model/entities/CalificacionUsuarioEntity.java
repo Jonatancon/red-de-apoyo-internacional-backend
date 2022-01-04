@@ -46,4 +46,7 @@ public class CalificacionUsuarioEntity {
         return usuarioEntity;
     }
 
+    public UsuarioEntity getAnfitrionCalificador() {
+        return anfitrionCalificador;
+    }
 }
