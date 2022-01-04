@@ -40,7 +40,7 @@ public class AuthenticationResource {
         if  (bindingResult.hasErrors())
             throw new RequestErrors("Missing data", "R-001", HttpStatus.BAD_REQUEST);
         if (Boolean.TRUE.equals(usuarioService.existeNombeUsuario(usuarioDto.getNombreUsuario())))
-            throw new RequestErrors("This Name User Already Exists", "R-002", HttpStatus.IM_USED);
+            throw new RequestErrors("This Name User Already Exists", "R-002", HttpStatus.BAD_REQUEST);
 
         UsuarioEntity user = autenticacionUtil.crearUsuario(usuarioDto);
         usuarioService.crearUsuario(user);

@@ -12,6 +12,8 @@ public class CasaDto {
 
     private String idCasa;
 
+    private String idPropietario;
+
     @NotBlank
     @NotNull
     private String direccion;
@@ -38,6 +40,10 @@ public class CasaDto {
 
     public String getIdCasa() {
         return idCasa;
+    }
+
+    public String getIdPropietario() {
+        return idPropietario;
     }
 
     public String getDireccion() {

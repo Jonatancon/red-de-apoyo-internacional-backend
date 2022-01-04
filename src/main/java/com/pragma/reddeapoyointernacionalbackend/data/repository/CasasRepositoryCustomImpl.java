@@ -43,17 +43,6 @@ public class CasasRepositoryCustomImpl implements CasasRepositoryCustom {
                 }
             }
         }
-
-        if ( !(criterioDto.getFechaFinal().isEmpty() || criterioDto.getFechaFinal().isBlank()) ||
-                !(criterioDto.getFechaInicial().isEmpty() || criterioDto.getFechaInicial().isBlank()) ) {
-
-            predicates.add(cb.not(cb.between(casa.get("disponibilidad.fecha_llegada"),
-                    criterioDto.getFechaInicial(), criterioDto.getFechaFinal())));
-
-            predicates.add(cb.not(cb.between(casa.get("disponibilidad.fecha_salida"),
-                    criterioDto.getFechaInicial(), criterioDto.getFechaFinal())));
-        }
-
         query.select(casa)
                 .where(cb.and(predicates.toArray(new Predicate[predicates.size()])));
 

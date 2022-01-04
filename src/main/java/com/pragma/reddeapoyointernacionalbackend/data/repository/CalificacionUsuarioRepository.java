@@ -4,6 +4,10 @@ import com.pragma.reddeapoyointernacionalbackend.data.model.entities.Calificacio
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CalificacionUsuarioRepository extends JpaRepository<CalificacionUsuarioEntity, Integer> {
+
+    List<CalificacionUsuarioEntity> findAllByUsuarioEntity_NombreUsuario(String nombreUsuario);
 }

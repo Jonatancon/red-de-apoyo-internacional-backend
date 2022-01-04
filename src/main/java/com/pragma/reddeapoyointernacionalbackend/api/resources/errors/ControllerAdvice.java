@@ -53,4 +53,10 @@ public class ControllerAdvice {
 
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(value = {NullPointerException.class})
+    public ResponseEntity<MessageDto> nullPointerEception() {
+        MessageDto message = MessageDto.builder().code("D-001").message("Not Found Data").build();
+        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    }
 }
