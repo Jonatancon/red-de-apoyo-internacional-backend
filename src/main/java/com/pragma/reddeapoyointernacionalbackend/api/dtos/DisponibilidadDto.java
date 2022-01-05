@@ -1,12 +1,10 @@
 package com.pragma.reddeapoyointernacionalbackend.api.dtos;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 @Builder
 @AllArgsConstructor
@@ -14,12 +12,10 @@ public class DisponibilidadDto {
 
     @NotBlank
     @NotNull
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate fechaInicial;
+    private String fechaInicial;
     @NotBlank
     @NotNull
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate fechaFinal;
+    private String fechaFinal;
     @NotNull
     @NotBlank
     private String iDcasa;
@@ -27,11 +23,11 @@ public class DisponibilidadDto {
     private boolean calificoUsuario;
     private boolean calificoAnfitrion;
 
-    public LocalDate getFechaInicial() {
+    public String getFechaInicial() {
         return fechaInicial;
     }
 
-    public LocalDate getFechaFinal() {
+    public String getFechaFinal() {
         return fechaFinal;
     }
 

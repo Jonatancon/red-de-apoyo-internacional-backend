@@ -16,14 +16,13 @@ import java.time.LocalDate;
 public class DisponibilidadEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_disponibilidad")
     private Integer idDisponibilidad;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_llegada")
     private LocalDate fechaLlegada;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_salida")
     private LocalDate fechaSalida;
 
