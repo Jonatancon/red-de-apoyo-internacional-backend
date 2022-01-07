@@ -31,4 +31,8 @@ public class ReservaCasaService {
     public List<DisponibilidadEntity> getAllRerservasByIdCasa(Integer idCasa) {
         return reserva.findAllByCasaReservada_IdCasa(idCasa);
     }
+
+    public List<DisponibilidadEntity> getAllReservasByNombreUsuario(String nombreUsuario) {
+        return reserva.findAllByUsuarioReservado_NombreUsuario(nombreUsuario);
+    }
 }

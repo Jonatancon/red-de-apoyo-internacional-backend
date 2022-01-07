@@ -20,6 +20,10 @@ public class CalificacionCasaService {
         return calificacion.findAllByCasa_IdCasa(id);
     }
 
+    public List<CalificacionCasaEntity> getAllCalificacionesByUserName(String userName) {
+        return calificacion.findAllByCasa_UsuarioEntity_NombreUsuario(userName);
+    }
+
     public void saveNewCalificacion(CalificacionCasaEntity newCalificacion){
         calificacion.save(newCalificacion);
     }

@@ -19,4 +19,6 @@ public interface DisponibilidadRepository extends JpaRepository<DisponibilidadEn
             (Integer idCasa, LocalDate fechallegada, LocalDate fechaSalida);
 
     List<DisponibilidadEntity> findAllByCasaReservada_IdCasa(Integer idCasa);
+
+    List<DisponibilidadEntity> findAllByUsuarioReservado_NombreUsuario(String nombreUsuario);
 }

@@ -6,6 +6,7 @@ import com.pragma.reddeapoyointernacionalbackend.http_errors.RequestErrors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ public class ReservaCasaResource {
      public static final String RESERVA = "api/reserva";
      public static final String GUARDAR = "/save";
      public static final String RESERVAS_CASA = "/obtener/{id}";
+     public static final String RESERVAS_USER = "/obtener/user/{id}";
 
      @Autowired
      private ReservaCasaUtil reserva;
@@ -46,6 +48,14 @@ public class ReservaCasaResource {
         List<DisponibilidadDto>result = reserva.obtenerReservasByIdCasa(id);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+     }
+
+     @GetMapping(RESERVAS_USER)
+     @PreAuthorize("hasAuthority('USUARIO') or hasAuthority('ANFITRION')")
+    public ResponseEntity<List<DisponibilidadDto>> obtenerReservasUser(@PathVariable String id) {
+         List<DisponibilidadDto> result = reserva.obtenerReservasByUserName(id);
+
+         return new ResponseEntity<>(result, HttpStatus.OK);
      }
 
 }
