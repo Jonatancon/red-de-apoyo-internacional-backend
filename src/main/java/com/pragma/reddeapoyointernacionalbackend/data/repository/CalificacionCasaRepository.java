@@ -10,4 +10,5 @@ import java.util.List;
 public interface CalificacionCasaRepository extends JpaRepository<CalificacionCasaEntity, Integer> {
 
     List<CalificacionCasaEntity> findAllByCasa_IdCasa(Integer id);
+    List<CalificacionCasaEntity> findAllByCasa_UsuarioEntity_NombreUsuario(String nombreUsuario);
 }

@@ -21,6 +21,7 @@ public class CalificacionCasasResources {
     public static final String CALIFICACION = "/api/calificacion";
     public static final String SAVE = "/save";
     public static final String OBTENER_ID_CASA = "/obtener/{id}";
+    public static final String OBTENER_UserName = "/obtener/name/{id}";
 
     @Autowired
     private CalificacionCasaUtil calificacionCasaUtil;
@@ -44,6 +45,13 @@ public class CalificacionCasasResources {
     public ResponseEntity< List<CalificacionCasaDto> > getAllCalificaciones(@PathVariable String id) {
 
         List<CalificacionCasaDto> calificaciones = calificacionCasaUtil.todasCalificaciones(id);
+
+        return new ResponseEntity<>(calificaciones, HttpStatus.OK);
+    }
+
+    @GetMapping(OBTENER_UserName)
+    public ResponseEntity<List<CalificacionCasaDto>> getAllCalificacionesByUsername(@PathVariable String id) {
+        List<CalificacionCasaDto> calificaciones = calificacionCasaUtil.todasCalificacionesByUserName(id);
 
         return new ResponseEntity<>(calificaciones, HttpStatus.OK);
     }

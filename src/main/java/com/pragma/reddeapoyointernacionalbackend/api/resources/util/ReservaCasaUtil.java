@@ -70,4 +70,15 @@ public class ReservaCasaUtil {
                     .build()
         ).collect(Collectors.toList());
     }
+
+    public List<DisponibilidadDto> obtenerReservasByUserName(String id) {
+        return reserva.getAllReservasByNombreUsuario(id).stream().map(reserva ->
+                DisponibilidadDto.builder().usuarioReserver(reserva.getUsuarioReservado().getNombreUsuario())
+                        .iDcasa(reserva.getCasaReservada().getIdCasa().toString())
+                        .fechaInicial(reserva.getFechaLlegada().format(formatter))
+                        .fechaFinal(reserva.getFechaSalida().format(formatter))
+                        .calificoAnfitrion(reserva.isCalificoAnfritrion()).calificoUsuario(reserva.isCalificoUsuario())
+                        .build()
+        ).collect(Collectors.toList());
+    }
 }

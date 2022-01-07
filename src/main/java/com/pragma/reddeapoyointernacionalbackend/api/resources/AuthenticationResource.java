@@ -26,6 +26,7 @@ public class AuthenticationResource {
     public static final String NEW_USER = "/new-user";
     public static final String LOGIN = "/login";
     public static final String REFRESH_TOKEN = "/refresh-token";
+    public static final String DATA_USER = "/data-user/{id}";
 
     @Autowired
     private UsuarioService usuarioService;
@@ -67,5 +68,19 @@ public class AuthenticationResource {
         JwtDto token = autenticacionUtil.refreshToken(jwtDto);
 
         return new ResponseEntity<>(token, HttpStatus.OK);
+    }
+
+    @GetMapping(DATA_USER)
+    public ResponseEntity<UsuarioDto> getDataUser(@PathVariable String id) {
+
+        if (!usuarioService.existeNombeUsuario(id))
+            throw new RequestErrors("Not Data", "R-001", HttpStatus.BAD_REQUEST);
+
+       UsuarioDto response =  usuarioService.getUsuarioFromNombreUsuario(id).map(user ->  UsuarioDto.builder()
+                .apellidos(user.getApellidos()).nombres(user.getNombres())
+                .ciudad(user.getCiudad()).pais(user.getPais()).estado(user.getEstado())
+                .build()).orElse(null);
+
+       return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

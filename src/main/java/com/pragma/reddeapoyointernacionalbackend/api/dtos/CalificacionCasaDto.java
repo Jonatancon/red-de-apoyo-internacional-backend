@@ -13,11 +13,7 @@ public class CalificacionCasaDto {
     @NotBlank
     @NotNull
     private String comentario;
-    @NotBlank
-    @NotNull
     private Integer puntajeCasa;
-    @NotBlank
-    @NotNull
     private Integer puntajeAnfitrion;
     @NotBlank
     @NotNull

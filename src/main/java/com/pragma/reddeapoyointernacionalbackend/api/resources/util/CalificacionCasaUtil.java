@@ -49,4 +49,14 @@ public class CalificacionCasaUtil {
                         .puntajeAnfitrion(calificacion.getCalificacionAnfitrion()).build()
                 ).collect(Collectors.toList());
     }
+
+    public List<CalificacionCasaDto> todasCalificacionesByUserName(String id) {
+        return calificacionService.getAllCalificacionesByUserName(id)
+                .stream().map(calificacion -> CalificacionCasaDto.builder()
+                        .idCasa(calificacion.getCasa().getIdCasa().toString())
+                        .idUsuario(calificacion.getUsuarioCalificador().getNombreUsuario())
+                        .comentario(calificacion.getComentario()).puntajeCasa(calificacion.getCalificacionCasa())
+                        .puntajeAnfitrion(calificacion.getCalificacionAnfitrion()).build()
+                ).collect(Collectors.toList());
+    }
 }
