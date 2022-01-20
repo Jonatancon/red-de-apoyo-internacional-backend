@@ -62,4 +62,8 @@ public class AutenticacionUtil {
     public JwtDto refreshToken (JwtDto jwtDto) throws ParseException {
         return new JwtDto(jwtProvider.refreshToken(jwtDto));
     }
+
+    public String updateUser(String token) {
+        return jwtProvider.getNombreUsuarioFromToken(token);
+    }
 }

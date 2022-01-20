@@ -38,6 +38,7 @@ class UsuarioPrincipalTest {
         assertEquals(usuarioEntity.getApellidos(), usuarioPrincipal.getApellidos());
         assertEquals(usuarioEntity.getCiudad(), usuarioPrincipal.getCiudad());
         assertEquals(usuarioEntity.getPais(), usuarioPrincipal.getPais());
+        assertEquals(usuarioEntity.getEstado(), usuarioPrincipal.getEstado());
         assertEquals(usuarioEntity.getPassword(), usuarioPrincipal.getPassword());
         assertEquals(usuarioEntity.getRolEntity().size(),
                 (long) usuarioPrincipal.getAuthorities().size());

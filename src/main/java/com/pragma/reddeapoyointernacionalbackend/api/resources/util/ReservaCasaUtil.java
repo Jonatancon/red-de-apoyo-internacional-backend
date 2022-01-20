@@ -27,7 +27,7 @@ public class ReservaCasaUtil {
     @Autowired
     private BusquedaCasasService busquedaCasasService;
 
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 
     public boolean isDisponible(DisponibilidadDto disponibilidad) {
@@ -61,24 +61,32 @@ public class ReservaCasaUtil {
 
     public List<DisponibilidadDto> obtenerReservasByIdCasa(String id){
 
-        return reserva.getAllRerservasByIdCasa(Integer.valueOf(id)).stream().map(reserva ->
-            DisponibilidadDto.builder().usuarioReserver(reserva.getUsuarioReservado().getNombreUsuario())
-                    .iDcasa(reserva.getCasaReservada().getIdCasa().toString())
-                    .fechaInicial(reserva.getFechaLlegada().format(formatter))
-                    .fechaFinal(reserva.getFechaSalida().format(formatter))
-                    .calificoAnfitrion(reserva.isCalificoAnfritrion()).calificoUsuario(reserva.isCalificoUsuario())
+        return reserva.getAllRerservasByIdCasa(Integer.valueOf(id)).stream().map(data ->
+            DisponibilidadDto.builder().usuarioReserver(data.getUsuarioReservado().getNombreUsuario())
+                    .iDcasa(data.getCasaReservada().getIdCasa().toString())
+                    .fechaInicial(data.getFechaLlegada().format(formatter))
+                    .fechaFinal(data.getFechaSalida().format(formatter))
+                    .calificoAnfitrion(data.isCalificoAnfritrion()).calificoUsuario(data.isCalificoUsuario())
                     .build()
         ).collect(Collectors.toList());
     }
 
     public List<DisponibilidadDto> obtenerReservasByUserName(String id) {
-        return reserva.getAllReservasByNombreUsuario(id).stream().map(reserva ->
-                DisponibilidadDto.builder().usuarioReserver(reserva.getUsuarioReservado().getNombreUsuario())
-                        .iDcasa(reserva.getCasaReservada().getIdCasa().toString())
-                        .fechaInicial(reserva.getFechaLlegada().format(formatter))
-                        .fechaFinal(reserva.getFechaSalida().format(formatter))
-                        .calificoAnfitrion(reserva.isCalificoAnfritrion()).calificoUsuario(reserva.isCalificoUsuario())
+        return reserva.getAllReservasByNombreUsuario(id).stream().map(data ->
+                DisponibilidadDto.builder().usuarioReserver(data.getUsuarioReservado().getNombreUsuario())
+                        .iDcasa(data.getCasaReservada().getIdCasa().toString())
+                        .fechaInicial(data.getFechaLlegada().format(formatter))
+                        .fechaFinal(data.getFechaSalida().format(formatter))
+                        .calificoAnfitrion(data.isCalificoAnfritrion()).calificoUsuario(data.isCalificoUsuario())
                         .build()
         ).collect(Collectors.toList());
+    }
+
+    public boolean controlDate(String fechaInicial, String fechaFinal) {
+        LocalDate fechaI = LocalDate.parse(fechaInicial, formatter);
+        LocalDate fechaF = LocalDate.parse(fechaFinal, formatter);
+        LocalDate now = LocalDate.now();
+
+        return !now.isAfter(fechaI) && !now.isAfter(fechaF);
     }
 }

@@ -12,5 +12,6 @@ public interface CasaRepository extends JpaRepository<CasaEntity, Integer>, Casa
     List<CasaEntity> findAllByPais (String pais);
     List<CasaEntity> findAllByCiudad (String ciudad);
     List<CasaEntity> findAllByEstado (String estado);
+    List<CasaEntity> findAllByUsuarioEntity_NombreUsuario(String nombreUsuario);
 
 }

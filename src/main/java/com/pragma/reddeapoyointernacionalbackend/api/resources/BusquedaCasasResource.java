@@ -19,6 +19,7 @@ public class BusquedaCasasResource {
     public static final String TODAS = "/todas";
     public static final String UNICA_CASA = "/{id}";
     public static final String CRITERIOS = "/criterio";
+    public static final String PROPIETARIO = "/propietario/{id}";
 
     @Autowired
     private BusquedaCasasTransformUtil busquedaUtil;
@@ -39,6 +40,13 @@ public class BusquedaCasasResource {
     @PostMapping(CRITERIOS)
     public ResponseEntity<List<CasaDto>> getAllPersonal(@RequestBody CriterioDto criterioDto) {
         List<CasaDto> result = busquedaUtil.buscarPorCriterio(criterioDto);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping(PROPIETARIO)
+    public ResponseEntity< List<CasaDto> > getAllForPropietario(@PathVariable String id) {
+        List<CasaDto> result = busquedaUtil.findByUserName(id);
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

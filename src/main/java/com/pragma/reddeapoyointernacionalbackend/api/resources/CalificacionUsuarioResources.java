@@ -28,7 +28,7 @@ public class CalificacionUsuarioResources {
 
     @PostMapping(SAVE)
     @PreAuthorize("hasAuthority('ANFITRION')")
-    public ResponseEntity<MessageDto> save (@Valid @RequestBody CalificacionUsuarioDto calificacion,
+    public ResponseEntity<MessageDto> saveNewCalificacion (@Valid @RequestBody CalificacionUsuarioDto calificacion,
                                             BindingResult bindingResult,
                                             @RequestHeader("Authorization") String token){
         if (bindingResult.hasErrors())

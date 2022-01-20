@@ -32,18 +32,24 @@ class ControllerAdviceTest {
     @Test
     void communicationError() {
         ResponseEntity<MessageDto> response = controllerAdvice.communicationError();
-        assertEquals("I-001", response.getBody().getCode());
+        assertEquals("I_001", response.getBody().getCode());
     }
 
     @Test
     void aunthenticationError() {
         ResponseEntity<MessageDto> response = controllerAdvice.aunthenticationError();
-        assertEquals("A-001", response.getBody().getCode());
+        assertEquals("A_001", response.getBody().getCode());
     }
 
     @Test
     void tokenError() {
         ResponseEntity<MessageDto> response = controllerAdvice.tokenError();
-        assertEquals("T-001", response.getBody().getCode());
+        assertEquals("T_001", response.getBody().getCode());
+    }
+
+    @Test
+    void nullPointerExceptionError() {
+        ResponseEntity<MessageDto> response = controllerAdvice.nullPointerEception();
+        assertEquals("D_001", response.getBody().getCode());
     }
 }
