@@ -85,4 +85,8 @@ public class UsuarioEntity {
     public Set<RolEntity> getRolEntity() {
         return rolEntity;
     }
+
+    public void setRolEntity(Set<RolEntity> rolEntity) {
+        this.rolEntity = rolEntity;
+    }
 }

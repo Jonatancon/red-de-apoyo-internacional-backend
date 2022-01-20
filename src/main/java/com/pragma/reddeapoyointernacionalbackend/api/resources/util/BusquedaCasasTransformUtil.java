@@ -3,6 +3,7 @@ package com.pragma.reddeapoyointernacionalbackend.api.resources.util;
 import com.pragma.reddeapoyointernacionalbackend.api.dtos.CasaDto;
 import com.pragma.reddeapoyointernacionalbackend.api.dtos.CriterioDto;
 import com.pragma.reddeapoyointernacionalbackend.domain.services.BusquedaCasasService;
+import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,12 +32,12 @@ public class BusquedaCasasTransformUtil {
     }
 
     public CasaDto buscarCasaTransform(String id){
-        return busqueda.buscarCasa(Integer.parseInt(id)).map(casa -> {
-            return CasaDto.builder().idCasa(casa.getIdCasa().toString()).telefono(casa.getTelefono())
+        return busqueda.buscarCasa(Integer.parseInt(id)).map(casa ->
+            CasaDto.builder().idCasa(casa.getIdCasa().toString()).telefono(casa.getTelefono())
                     .direccion(casa.getDireccion()).pais(casa.getPais()).estado(casa.getEstado())
                     .ciudad(casa.getCiudad()).urlFoto(casa.getUrlFoto())
-                    .idPropietario(casa.getUsuarioEntity().getNombreUsuario()).build();
-        }).orElseGet(null);
+                    .idPropietario(casa.getUsuarioEntity().getNombreUsuario()).build()
+        ).orElseGet(null);
     }
 
     public List<CasaDto> buscarPorCriterio(CriterioDto criterio) {
@@ -46,6 +47,15 @@ public class BusquedaCasasTransformUtil {
                         .estado(casa.getEstado()).ciudad(casa.getCiudad()).direccion(casa.getDireccion())
                         .telefono(casa.getTelefono()).urlFoto(casa.getUrlFoto())
                         .idPropietario(casa.getUsuarioEntity().getNombreUsuario()).build()
+                ).collect(Collectors.toList());
+    }
+
+    public List<CasaDto> findByUserName(String userName) {
+        return busqueda.obtenerPorPropietario(userName).stream().map(casa ->
+                CasaDto.builder().idCasa(casa.getIdCasa().toString()).pais(casa.getPais()).estado(casa.getEstado())
+                        .ciudad(casa.getCiudad()).urlFoto(casa.getUrlFoto()).telefono(casa.getTelefono())
+                        .direccion(casa.getDireccion()).idPropietario(casa.getUsuarioEntity().getNombreUsuario())
+                        .build()
                 ).collect(Collectors.toList());
     }
 }

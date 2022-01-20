@@ -1,6 +1,7 @@
 package com.pragma.reddeapoyointernacionalbackend.api.resources.errors;
 
 import com.pragma.reddeapoyointernacionalbackend.api.dtos.MessageDto;
+import com.pragma.reddeapoyointernacionalbackend.data.model.enums.CodeError;
 import com.pragma.reddeapoyointernacionalbackend.http_errors.RequestErrors;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -27,7 +28,7 @@ public class ControllerAdvice {
 
     @ExceptionHandler(value = CommunicationException.class)
     public ResponseEntity<MessageDto> communicationError() {
-        MessageDto message = MessageDto.builder().code("I-001").message("Internal  Server Error").build();
+        MessageDto message = MessageDto.builder().code(CodeError.I_001.name()).message("Internal  Server Error").build();
 
         return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -39,7 +40,7 @@ public class ControllerAdvice {
             AccessDeniedException.class
     })
     public ResponseEntity<MessageDto> aunthenticationError() {
-        MessageDto message = MessageDto.builder().code("A-001").message("Unauthorized").build();
+        MessageDto message = MessageDto.builder().code(CodeError.A_001.name()).message("Unauthorized").build();
 
         return new ResponseEntity<>(message, HttpStatus.UNAUTHORIZED);
     }
@@ -49,14 +50,14 @@ public class ControllerAdvice {
             UnsupportedJwtException.class
     })
     public ResponseEntity<MessageDto> tokenError() {
-        MessageDto message = MessageDto.builder().code("T-001").message("Error in the Token").build();
+        MessageDto message = MessageDto.builder().code(CodeError.T_001.name()).message("Error in the Token").build();
 
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = {NullPointerException.class})
     public ResponseEntity<MessageDto> nullPointerEception() {
-        MessageDto message = MessageDto.builder().code("D-001").message("Not Found Data").build();
+        MessageDto message = MessageDto.builder().code(CodeError.D_001.name()).message("Not Found Data").build();
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 }

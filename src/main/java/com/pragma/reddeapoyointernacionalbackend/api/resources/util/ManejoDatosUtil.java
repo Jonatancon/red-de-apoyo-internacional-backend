@@ -8,8 +8,6 @@ import com.pragma.reddeapoyointernacionalbackend.domain.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class ManejoDatosUtil {
 

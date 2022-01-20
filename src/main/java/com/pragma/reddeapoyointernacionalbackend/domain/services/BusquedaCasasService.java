@@ -41,4 +41,8 @@ public class BusquedaCasasService {
         return casaRepository.findAllByCriterial(criterioDto);
     }
 
+    public List<CasaEntity> obtenerPorPropietario(String nombreUsuario){
+        return casaRepository.findAllByUsuarioEntity_NombreUsuario(nombreUsuario);
+    }
+
 }

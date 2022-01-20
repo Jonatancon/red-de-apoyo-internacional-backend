@@ -14,7 +14,6 @@ public class CalificacionUsuarioDto {
     @NotBlank
     private String comentario;
     @NotNull
-    @NotBlank
     private Integer calificacion;
     @NotNull
     @NotBlank

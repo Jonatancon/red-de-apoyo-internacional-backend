@@ -15,10 +15,10 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(ReservaCasaResource.RESERVA)
+@RequestMapping(ReservaCasaResource.RESERVA_MAIN)
 public class ReservaCasaResource {
 
-     public static final String RESERVA = "api/reserva";
+     public static final String RESERVA_MAIN = "api/reserva";
      public static final String GUARDAR = "/save";
      public static final String RESERVAS_CASA = "/obtener/{id}";
      public static final String RESERVAS_USER = "/obtener/user/{id}";
@@ -35,6 +35,9 @@ public class ReservaCasaResource {
 
          if (!reserva.isDisponible(disponibilidadDto))
               throw new RequestErrors("Not Available Date", "R-003", HttpStatus.BAD_REQUEST );
+
+         if (!reserva.controlDate(disponibilidadDto.getFechaInicial(), disponibilidadDto.getFechaFinal()))
+             throw new RequestErrors("Not Available Date", "R-003", HttpStatus.BAD_REQUEST);
 
          token = token.split(" ")[1];
 
