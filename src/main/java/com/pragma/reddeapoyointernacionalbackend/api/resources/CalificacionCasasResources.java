@@ -3,6 +3,8 @@ package com.pragma.reddeapoyointernacionalbackend.api.resources;
 import com.pragma.reddeapoyointernacionalbackend.api.dtos.CalificacionCasaDto;
 import com.pragma.reddeapoyointernacionalbackend.api.dtos.MessageDto;
 import com.pragma.reddeapoyointernacionalbackend.api.resources.util.CalificacionCasaUtil;
+import com.pragma.reddeapoyointernacionalbackend.data.model.enums.CodeError;
+import com.pragma.reddeapoyointernacionalbackend.data.model.enums.CodeInfos;
 import com.pragma.reddeapoyointernacionalbackend.http_errors.RequestErrors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,12 +33,12 @@ public class CalificacionCasasResources {
                                                           BindingResult bindingResult,
                                                           @RequestHeader("Authorization") String token){
         if (bindingResult.hasErrors())
-            throw new RequestErrors("Missing Data", "R-001", HttpStatus.BAD_REQUEST);
+            throw new RequestErrors("Missing Data", CodeError.R_001.name(), HttpStatus.BAD_REQUEST);
 
         token = token.split(" ")[1];
 
         calificacionCasaUtil.guardarCalificacion(calificacion, token);
-        MessageDto message = new MessageDto("S-001", "Calificacios its save");
+        MessageDto message = new MessageDto(CodeInfos.S_001.name(), "Calificacion its save");
 
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
