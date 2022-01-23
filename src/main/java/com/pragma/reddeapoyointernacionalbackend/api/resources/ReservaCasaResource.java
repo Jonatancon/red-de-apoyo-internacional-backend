@@ -2,6 +2,7 @@ package com.pragma.reddeapoyointernacionalbackend.api.resources;
 
 import com.pragma.reddeapoyointernacionalbackend.api.dtos.DisponibilidadDto;
 import com.pragma.reddeapoyointernacionalbackend.api.resources.util.ReservaCasaUtil;
+import com.pragma.reddeapoyointernacionalbackend.data.model.enums.CodeError;
 import com.pragma.reddeapoyointernacionalbackend.http_errors.RequestErrors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,13 +32,13 @@ public class ReservaCasaResource {
                                                              BindingResult bindingResult,
                                                              @RequestHeader("Authorization") String token ) {
          if (bindingResult.hasErrors())
-              throw new RequestErrors("Missing Data", "R-001", HttpStatus.BAD_REQUEST);
+              throw new RequestErrors("Missing Data", CodeError.R_001.name(), HttpStatus.BAD_REQUEST);
 
          if (!reserva.isDisponible(disponibilidadDto))
-              throw new RequestErrors("Not Available Date", "R-003", HttpStatus.BAD_REQUEST );
+              throw new RequestErrors("Not Available Date", CodeError.R_003.name(), HttpStatus.BAD_REQUEST );
 
          if (!reserva.controlDate(disponibilidadDto.getFechaInicial(), disponibilidadDto.getFechaFinal()))
-             throw new RequestErrors("Not Available Date", "R-003", HttpStatus.BAD_REQUEST);
+             throw new RequestErrors("Not Available Date", CodeError.R_003.name(), HttpStatus.BAD_REQUEST);
 
          token = token.split(" ")[1];
 
