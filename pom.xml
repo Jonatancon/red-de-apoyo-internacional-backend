@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.pragma</groupId>
 	<artifactId>red-de-apoyo-internacional-backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-Release</version>
 	<name>red-de-apoyo-internacional-backend</name>
 	<description>proyecto propuesto por pragma</description>
 	<properties>
